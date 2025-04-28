@@ -7,7 +7,7 @@ public class Juego_de_mesa extends Producto{
 
         //Constructor para Juego de Mesa
     public Juego_de_mesa(String nombre, int precio,String tipo ,String editorial, int stock, int Numero_jugadores){
-        super.Producto(nombre, precio, tipo, stock);
+        super(nombre, precio, tipo, stock);
         this.editorial = editorial;
         this.Numero_jugadores = Numero_jugadores;
     }

@@ -6,7 +6,7 @@ public class Cartas extends Producto{
 
         //Constructor para Cartas
     public Cartas(String nombre, int precio, String tipo, int stock, String juego){
-        super.Producto(nombre, precio, tipo, stock);
+        super(nombre, precio, tipo, stock);
         this.juego = juego;
     }
 

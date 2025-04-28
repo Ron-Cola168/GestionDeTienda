@@ -6,7 +6,7 @@ public class Alimento extends Producto{
 
         //Constructor para Alimentos
     public Alimento(String nombre, int precio, String tipo,int stock, boolean esFrio){
-        super.Producto(nombre, precio, tipo, stock);
+        super(nombre, precio, tipo, stock);
         this.esFrio = esFrio;
     }
 

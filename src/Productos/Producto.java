@@ -8,7 +8,7 @@ public class Producto {
     private int stock;
 
         //Constructor para Productos
-    public void Producto(String nombre, int precio, String tipo, int stock){
+    public Producto(String nombre, int precio, String tipo, int stock){
         this.nombre = nombre;
         this.precio = precio;
         this.tipo = tipo;
