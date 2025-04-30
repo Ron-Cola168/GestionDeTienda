@@ -9,6 +9,16 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
+import java.awt.GridLayout;
+import java.awt.BorderLayout;
+import java.awt.GridBagLayout;
+import javax.swing.JTextArea;
+import java.awt.GridBagConstraints;
+import javax.swing.BoxLayout;
+import javax.swing.SwingConstants;
+import javax.swing.JSeparator;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class VenMenu extends JFrame {
 
@@ -42,16 +52,110 @@ public class VenMenu extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblTitulo = new JLabel("Magicas: El encuentro");
-		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		lblTitulo.setBounds(290, 10, 274, 34);
-		contentPane.add(lblTitulo);
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(199, 169, 139));
+		contentPane.add(panel, BorderLayout.CENTER);
+		panel.setLayout(null);
 		
-		JButton btnPrueba = new JButton("New button");
-		btnPrueba.setBounds(176, 214, 89, 23);
-		contentPane.add(btnPrueba);
+		JButton btnJuegosMesa = new JButton("Juegos De mesa");
+		btnJuegosMesa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnJuegosMesa.setBounds(40, 74, 147, 101);
+		panel.add(btnJuegosMesa);
+		
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(641, 0, 203, 497);
+		panel.add(panel_1);
+		panel_1.setBackground(new Color(199, 169, 139));
+		panel_1.setLayout(null);
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setBackground(new Color(192, 192, 192));
+		textArea.setBounds(10, 5, 183, 374);
+		panel_1.add(textArea);
+		
+		JLabel lblTotal = new JLabel("Total");
+		lblTotal.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblTotal.setBounds(10, 378, 116, 33);
+		panel_1.add(lblTotal);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnCancelar.setBounds(10, 453, 183, 33);
+		panel_1.add(btnCancelar);
+		
+		JButton btnCobrar = new JButton("Cobrar");
+		btnCobrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnCobrar.setBounds(10, 409, 183, 33);
+		panel_1.add(btnCobrar);
+		
+		JLabel lblTotal_1 = new JLabel("");
+		lblTotal_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblTotal_1.setBounds(136, 378, 57, 33);
+		panel_1.add(lblTotal_1);
+		
+		JButton btnTCG = new JButton("TCG");
+		btnTCG.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnTCG.setBounds(197, 74, 147, 101);
+		panel.add(btnTCG);
+		
+		JButton btnTop10 = new JButton("TOP 10 MÁS VENDIDOS");
+		btnTop10.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnTop10.setBounds(354, 74, 147, 101);
+		panel.add(btnTop10);
+		
+		JButton btnComida = new JButton("Comida");
+		btnComida.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnComida.setBounds(40, 186, 147, 101);
+		panel.add(btnComida);
+		
+		JButton btnBebidas = new JButton("Bebidas");
+		btnBebidas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnBebidas.setBounds(197, 186, 147, 101);
+		panel.add(btnBebidas);
+		
+		JButton btnZonaSocios = new JButton("Zona Socios");
+		btnZonaSocios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnZonaSocios.setBounds(354, 186, 147, 101);
+		panel.add(btnZonaSocios);
+		
+		JButton btnInventario = new JButton("Inventario");
+		btnInventario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnInventario.setBounds(40, 298, 461, 65);
+		panel.add(btnInventario);
+		
+		JLabel lblNewLabel = new JLabel("Magicas: el encuentro");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 28));
+		contentPane.add(lblNewLabel, BorderLayout.NORTH);
 	}
-
 }
