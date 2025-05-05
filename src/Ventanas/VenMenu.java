@@ -45,6 +45,7 @@ public class VenMenu extends JFrame {
 	 * Create the frame.
 	 */
 	public VenMenu() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 870, 580);
 		contentPane = new JPanel();
@@ -74,10 +75,10 @@ public class VenMenu extends JFrame {
 		panel_1.setBackground(new Color(199, 169, 139));
 		panel_1.setLayout(null);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setBackground(new Color(192, 192, 192));
-		textArea.setBounds(10, 5, 183, 374);
-		panel_1.add(textArea);
+		JTextArea textCarrito = new JTextArea();
+		textCarrito.setBackground(new Color(192, 192, 192));
+		textCarrito.setBounds(10, 5, 183, 374);
+		panel_1.add(textCarrito);
 		
 		JLabel lblTotal = new JLabel("Total");
 		lblTotal.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -148,14 +149,17 @@ public class VenMenu extends JFrame {
 		JButton btnInventario = new JButton("Inventario");
 		btnInventario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				VenInventario v1 = new VenInventario();
+				v1.setVisible(true);
+				dispose();
 			}
 		});
 		btnInventario.setBounds(40, 298, 461, 65);
 		panel.add(btnInventario);
 		
-		JLabel lblNewLabel = new JLabel("Magicas: el encuentro");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		contentPane.add(lblNewLabel, BorderLayout.NORTH);
+		JLabel lblTitulo = new JLabel("Magicas: el encuentro");
+		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 28));
+		contentPane.add(lblTitulo, BorderLayout.NORTH);
 	}
 }

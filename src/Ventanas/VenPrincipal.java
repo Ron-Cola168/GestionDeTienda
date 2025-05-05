@@ -41,6 +41,7 @@ public class VenPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public VenPrincipal() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 870, 580);
 		contentPane = new JPanel();
