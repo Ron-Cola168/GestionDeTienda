@@ -63,6 +63,9 @@ public class VenMenu extends JFrame {
 		JButton btnJuegosMesa = new JButton("Juegos De mesa");
 		btnJuegosMesa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				VenJDG venJGD = new VenJDG();
+				venJGD.setVisible(true);
+				dispose();
 			}
 		});
 		btnJuegosMesa.setBounds(40, 74, 147, 101);
