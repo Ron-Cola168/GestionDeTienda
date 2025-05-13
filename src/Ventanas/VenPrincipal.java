@@ -84,10 +84,12 @@ public class VenPrincipal extends JFrame {
 		JButton btnIniciar = new JButton("Iniciar sesion");
 		btnIniciar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VenMenu v1 = new VenMenu();
-				v1.setVisible(true);
-				
-				dispose();
+				if(){
+
+				}
+				else{
+
+				}
 			}
 		});
 		btnIniciar.setBounds(360, 298, 121, 23);
