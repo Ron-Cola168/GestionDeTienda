@@ -1,0 +1,2 @@
+INSERT INTO EMPLEADOS (ID, NOMBRE, APELLIDOS)
+VALUES (SEQ_EMPLEADOS_ID.nextval, 'Pablo', 'Segura González');
