@@ -13,6 +13,8 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
+import ClasesDAO.EmpleadoDAO;
 import util.DatabaseConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -30,7 +32,7 @@ public class VenPrincipal extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textCorreo;
-	private JTextField textContraseña;
+	private JPasswordField textContraseña;
 
 	/**
 	 * Launch the application.
@@ -87,36 +89,23 @@ public class VenPrincipal extends JFrame {
 		lblContraseña.setBounds(193, 220, 146, 37);
 		contentPane.add(lblContraseña);
 
-		textContraseña = new JTextField();
+		textContraseña = new JPasswordField();
 		textContraseña.setBounds(284, 230, 275, 20);
 		contentPane.add(textContraseña);
-		textContraseña.setColumns(10);
 		
 		JButton btnIniciar = new JButton("Iniciar sesion");
 		btnIniciar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				/****Iniciar sesion****/
-				String sentencia = "SELECT correo, contraseña FROM empleados WHERE correo = ? AND contraseña = ?";
-				Connection conexion = null;
-				PreparedStatement sentenciaPreparada = null;
-
-				try{
-					conexion = DatabaseConnection.getConnection();
-					sentenciaPreparada = conexion.prepareStatement(sentencia);
-					sentenciaPreparada.setString(1, textCorreo.getText());
-					sentenciaPreparada.setString(2, textContraseña.getText());
-					ResultSet rs = sentenciaPreparada.executeQuery();
-
-					if(rs.next()){
-						VenMenu v1 = new VenMenu();
-						v1.setVisible(true);
-						dispose();
-					}
+                try {
+                    if(EmpleadoDAO.autenticarEmpleado(textCorreo, textContraseña)){
+                        VenMenu v1 = new VenMenu();
+                        v1.setVisible(true);
+                        dispose();
+                    }
 					else{
-						JOptionPane.showMessageDialog(null, "¡ERROR! Correo o contraseña incorrecto");
+						JOptionPane.showMessageDialog(null, "¡ERROR! Contraseña o correo incorrectos. Intentelo nuevamente.", "ERROR", JOptionPane.ERROR_MESSAGE);
 					}
-				} catch (Exception ex) {
+                } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
             }

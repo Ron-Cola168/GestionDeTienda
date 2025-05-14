@@ -1,5 +1,7 @@
 package Ventanas;
 
+import ClasesDAO.EmpleadoDAO;
+
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -135,16 +137,26 @@ public class VenMenu extends JFrame {
 		btnZonaSocios.setBounds(354, 186, 147, 101);
 		panel.add(btnZonaSocios);
 		
-		JButton btnInventario = new JButton("Inventario");
-		btnInventario.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				VenInventario v1 = new VenInventario();
-				v1.setVisible(true);
-				dispose();
-			}
-		});
-		btnInventario.setBounds(40, 298, 461, 65);
-		panel.add(btnInventario);
+		/**if(Empleado.esAdmin() == true){
+			JButton btnInventario = new JButton("Inventario");
+			btnInventario.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					VenInventario v1 = new VenInventario();
+					v1.setVisible(true);
+					dispose();
+				}
+			});
+			btnInventario.setBounds(40, 298, 461, 65);
+			panel.add(btnInventario);
+
+			JButton btngestionEmpleados = new JButton("Gestionar Empleados");
+			btngestionEmpleados.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
+			btngestionEmpleados.setBounds(40, 298, 461, 65);
+			panel.add(btngestionEmpleados);
+		}**/
 		
 		JLabel lblTitulo = new JLabel("Magicas: el encuentro");
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);

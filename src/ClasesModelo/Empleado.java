@@ -2,17 +2,18 @@ package ClasesModelo;
 
 public class Empleado {
 
-    private  int id;
-    private String nombre;
-    private String apellidos;
-    private String correo;
-    private String tipoEmpleado;
-    private String contraseña;
+    private static int id;
+    private static String nombre;
+    private static String apellidos;
+    private static String correo;
+    private static String tipoEmpleado;
+    private static String contraseña;
 
     /**Constructores**/
     public Empleado(){
     }
 
+    /**Constructor solo para INSERTS**/
     public Empleado(String nombre, String apellidos, String tipoEmpleado, String contraseña){
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -20,6 +21,7 @@ public class Empleado {
         this.contraseña = contraseña;
     }
 
+    /**Constructor solo para consultas y actualizaciones**/
     public Empleado(int id,String nombre, String apellidos, String correo, String tipoEmpleado, String contraseña){
         this.id = id;
         this.nombre = nombre;
@@ -30,7 +32,7 @@ public class Empleado {
     }
 
     /**Getters y Setters**/
-    public int getId() {
+    public static int getId() {
         return id;
     }
 
@@ -38,7 +40,7 @@ public class Empleado {
         this.id = id;
     }
 
-    public String getNombre() {
+    public static String getNombre() {
         return nombre;
     }
 
@@ -46,7 +48,7 @@ public class Empleado {
         this.nombre = nombre;
     }
 
-    public String getApellidos() {
+    public static String getApellidos() {
         return apellidos;
     }
 
@@ -54,7 +56,7 @@ public class Empleado {
         this.apellidos = apellidos;
     }
 
-    public String getCorreo() {
+    public static String getCorreo() {
         return correo;
     }
 
@@ -62,7 +64,7 @@ public class Empleado {
         this.correo = correo;
     }
 
-    public String getTipoEmpleado() {
+    public static String getTipoEmpleado() {
         return tipoEmpleado;
     }
 
@@ -70,11 +72,23 @@ public class Empleado {
         this.tipoEmpleado = tipoEmpleado;
     }
 
-    public String getContraseña() {
+    public static String getContraseña() {
         return contraseña;
     }
 
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
+    }
+
+    /**ToString**/
+    @Override
+    public String toString() {
+        return "Persona{" +
+                "id =" + this.id +
+                ", nombre ='" + this.nombre + '\'' +
+                ", apellido ='" + this.apellidos + '\'' +
+                ", email ='" + this.correo + '\'' +
+                ", Cargo ='" + this.tipoEmpleado + '\'' +
+                '}';
     }
 }
