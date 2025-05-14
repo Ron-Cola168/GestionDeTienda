@@ -13,13 +13,24 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import util.DatabaseConnection;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JPasswordField;
+import javax.swing.JOptionPane;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JTable;
 
 public class VenPrincipal extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textID;
-	private JTextField textField;
+	private JTextField textCorreo;
+	private JTextField textContraseña;
 
 	/**
 	 * Launch the application.
@@ -61,36 +72,54 @@ public class VenPrincipal extends JFrame {
 		lblNewLabel.setBounds(360, 81, 121, 37);
 		contentPane.add(lblNewLabel);
 		
-		JLabel lblid = new JLabel("Código de empleado");
-		lblid.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblid.setBounds(193, 181, 146, 28);
-		contentPane.add(lblid);
+		JLabel lblCorreo = new JLabel("Correo electronico:");
+		lblCorreo.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblCorreo.setBounds(193, 181, 146, 28);
+		contentPane.add(lblCorreo);
+
+		textCorreo = new JTextField();
+		textCorreo.setBounds(360, 187, 199, 20);
+		contentPane.add(textCorreo);
+		textCorreo.setColumns(10);
 		
-		textID = new JTextField();
-		textID.setBounds(360, 187, 199, 20);
-		contentPane.add(textID);
-		textID.setColumns(10);
-		
-		JLabel lblContraseña = new JLabel("Contraseña");
+		JLabel lblContraseña = new JLabel("Contraseña:");
 		lblContraseña.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblContraseña.setBounds(193, 220, 146, 37);
 		contentPane.add(lblContraseña);
-		
-		textField = new JTextField();
-		textField.setBounds(284, 230, 275, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+
+		textContraseña = new JTextField();
+		textContraseña.setBounds(284, 230, 275, 20);
+		contentPane.add(textContraseña);
+		textContraseña.setColumns(10);
 		
 		JButton btnIniciar = new JButton("Iniciar sesion");
 		btnIniciar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(){
 
-				}
-				else{
+				/****Iniciar sesion****/
+				String sentencia = "SELECT correo, contraseña FROM empleados WHERE correo = ? AND contraseña = ?";
+				Connection conexion = null;
+				PreparedStatement sentenciaPreparada = null;
 
-				}
-			}
+				try{
+					conexion = DatabaseConnection.getConnection();
+					sentenciaPreparada = conexion.prepareStatement(sentencia);
+					sentenciaPreparada.setString(1, textCorreo.getText());
+					sentenciaPreparada.setString(2, textContraseña.getText());
+					ResultSet rs = sentenciaPreparada.executeQuery();
+
+					if(rs.next()){
+						VenMenu v1 = new VenMenu();
+						v1.setVisible(true);
+						dispose();
+					}
+					else{
+						JOptionPane.showMessageDialog(null, "¡ERROR! Correo o contraseña incorrecto");
+					}
+				} catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
 		});
 		btnIniciar.setBounds(360, 298, 121, 23);
 		contentPane.add(btnIniciar);

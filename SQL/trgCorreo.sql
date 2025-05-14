@@ -1,9 +1,0 @@
-CREATE OR REPLACE TRIGGER trg_empleados_correo
-BEFORE INSERT ON EMPLEADOS
-FOR EACH ROW
-BEGIN
-  IF :new.APELLIDOS IS NOT NULL AND :new.NOMBRE IS NOT NULL THEN
-    :new.CORREO := LOWER(SUBSTR(:new.APELLIDOS, 1, 3) || :new.ID || SUBSTR(:new.NOMBRE, 1, INSTR(:new.NOMBRE, ' ') - 1) || '@magicas.es');
-  END IF;
-END;
-/

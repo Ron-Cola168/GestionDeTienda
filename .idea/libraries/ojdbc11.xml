@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="ojdbc11">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../DAO_OracleAutonomousDatabase/lib/ojdbc11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../DAO_OracleAutonomousDatabase/lib/oraclepki.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../DAO_OracleAutonomousDatabase/lib/osdt_cert.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../DAO_OracleAutonomousDatabase/lib/osdt_core.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
