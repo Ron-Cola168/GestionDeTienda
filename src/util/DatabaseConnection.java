@@ -1,5 +1,7 @@
 package util;
 
+import oracle.jdbc.driver.OracleDriver;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -47,7 +49,7 @@ public class DatabaseConnection {
                 System.out.println("Usando Wallet en (configurado vía TNS_ADMIN): " + WALLET_PATH);
 
                 // Registrar el driver explícitamente (puede ayudar en algunos entornos)
-                DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+                DriverManager.registerDriver(new OracleDriver());
 
                 connection = DriverManager.getConnection(DB_URL, props);
                 System.out.println("¡Conexión establecida exitosamente!");
