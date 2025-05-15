@@ -2,12 +2,12 @@ package ClasesModelo;
 
 public class Empleado {
 
-    private static int id;
-    private static String nombre;
-    private static String apellidos;
-    private static String correo;
-    private static String tipoEmpleado;
-    private static String contraseña;
+    private  int id;
+    private  String nombre;
+    private  String apellidos;
+    private  String correo;
+    private  String tipoEmpleado;
+    private  String contraseña;
 
     /**Constructores**/
     public Empleado(){
@@ -32,7 +32,7 @@ public class Empleado {
     }
 
     /**Getters y Setters**/
-    public static int getId() {
+    public  int getId() {
         return id;
     }
 
@@ -40,7 +40,7 @@ public class Empleado {
         this.id = id;
     }
 
-    public static String getNombre() {
+    public  String getNombre() {
         return nombre;
     }
 
@@ -48,7 +48,7 @@ public class Empleado {
         this.nombre = nombre;
     }
 
-    public static String getApellidos() {
+    public  String getApellidos() {
         return apellidos;
     }
 
@@ -56,7 +56,7 @@ public class Empleado {
         this.apellidos = apellidos;
     }
 
-    public static String getCorreo() {
+    public  String getCorreo() {
         return correo;
     }
 
@@ -64,7 +64,7 @@ public class Empleado {
         this.correo = correo;
     }
 
-    public static String getTipoEmpleado() {
+    public  String getTipoEmpleado() {
         return tipoEmpleado;
     }
 
@@ -72,7 +72,7 @@ public class Empleado {
         this.tipoEmpleado = tipoEmpleado;
     }
 
-    public static String getContraseña() {
+    public  String getContraseña() {
         return contraseña;
     }
 
@@ -91,4 +91,5 @@ public class Empleado {
                 ", Cargo ='" + this.tipoEmpleado + '\'' +
                 '}';
     }
+
 }

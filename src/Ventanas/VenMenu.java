@@ -1,6 +1,7 @@
 package Ventanas;
 
 import ClasesDAO.EmpleadoDAO;
+import util.SesionEmpleado;
 
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -136,8 +137,11 @@ public class VenMenu extends JFrame {
 		});
 		btnZonaSocios.setBounds(354, 186, 147, 101);
 		panel.add(btnZonaSocios);
-		
-		/**if(Empleado.esAdmin() == true){
+
+
+		/**Botones de administrador**/
+		if(SesionEmpleado.esAdmin()){
+
 			JButton btnInventario = new JButton("Inventario");
 			btnInventario.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -154,9 +158,9 @@ public class VenMenu extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 				}
 			});
-			btngestionEmpleados.setBounds(40, 298, 461, 65);
+			btngestionEmpleados.setBounds(40, 347, 461, 65);
 			panel.add(btngestionEmpleados);
-		}**/
+		}
 		
 		JLabel lblTitulo = new JLabel("Magicas: el encuentro");
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);

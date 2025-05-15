@@ -14,6 +14,8 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import ClasesModelo.Empleado;
+import util.SesionEmpleado;
 import ClasesDAO.EmpleadoDAO;
 import util.DatabaseConnection;
 import java.sql.Connection;
@@ -96,16 +98,22 @@ public class VenPrincipal extends JFrame {
 		JButton btnIniciar = new JButton("Iniciar sesion");
 		btnIniciar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-                try {
-                    if(EmpleadoDAO.autenticarEmpleado(textCorreo, textContraseña)){
-                        VenMenu v1 = new VenMenu();
-                        v1.setVisible(true);
-                        dispose();
-                    }
-					else{
-						JOptionPane.showMessageDialog(null, "¡ERROR! Contraseña o correo incorrectos. Intentelo nuevamente.", "ERROR", JOptionPane.ERROR_MESSAGE);
+				try {
+					Empleado empleado = EmpleadoDAO.autenticarEmpleado(textCorreo, textContraseña);
+					if(empleado != null) {
+						if(SesionEmpleado.iniciarSesion(empleado)) {
+							VenMenu v1 = new VenMenu();
+							v1.setVisible(true);
+							dispose();
+						}
+					} else {
+						JOptionPane.showMessageDialog(null,
+								"¡ERROR! Contraseña o correo incorrectos. Intentelo nuevamente.",
+								"ERROR",
+								JOptionPane.ERROR_MESSAGE);
 					}
-                } catch (SQLException ex) {
+				} catch
+				(SQLException ex) {
                     throw new RuntimeException(ex);
                 }
             }
