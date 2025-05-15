@@ -150,7 +150,7 @@ public class VenMenu extends JFrame {
 					dispose();
 				}
 			});
-			btnInventario.setBounds(40, 298, 461, 65);
+			btnInventario.setBounds(40, 298, 461, 40);
 			panel.add(btnInventario);
 
 			JButton btngestionEmpleados = new JButton("Gestionar Empleados");
@@ -158,10 +158,22 @@ public class VenMenu extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 				}
 			});
-			btngestionEmpleados.setBounds(40, 347, 461, 65);
+			btngestionEmpleados.setBounds(40, 348, 461, 40);
 			panel.add(btngestionEmpleados);
 		}
-		
+
+		JButton btnCerrarSesion = new JButton("Cerrar Sesión");
+		btnCerrarSesion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SesionEmpleado.cerrarSesion();
+				VenPrincipal venLogin = new VenPrincipal();
+				venLogin.setVisible(true);
+				dispose();
+			}
+		});
+		btnCerrarSesion.setBounds(40, 450, 461, 40);  // Posición en la parte inferior
+		panel.add(btnCerrarSesion);
+
 		JLabel lblTitulo = new JLabel("Magicas: el encuentro");
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 28));
