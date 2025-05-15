@@ -5,7 +5,7 @@ import ClasesModelo.Empleado;
 public class SesionEmpleado {
     private static Empleado empleadoActual = null;
     private static boolean sesionActiva = false;
-    private static final String Admin = "Admin";
+    private static final String Admin = "Administrador";
 
     // Inicia la sesión con un empleado
     public static boolean iniciarSesion(Empleado empleado) {
