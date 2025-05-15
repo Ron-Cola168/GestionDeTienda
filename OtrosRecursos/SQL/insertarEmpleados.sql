@@ -1,0 +1,2 @@
+INSERT INTO empleados (id, nombre, apellidos,tipoempleado,contraseña)
+VALUES (ADMIN.SEQ_EMPLEADOS_ID.NEXTVAL, 'Nombre del empleado', 'Apellidos del empleado','Tipo de empleado','Contraseña del correo');
