@@ -16,6 +16,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 import javax.swing.JScrollPane;
 
@@ -118,18 +119,68 @@ public class VenJDG extends JFrame {
         menuBar.add(mnPorJugadores);
         
         JMenuItem mntmIndividual = new JMenuItem("Para 1 jugador");
+        mntmIndividual.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    List<Juego_de_mesa> juegos = Juego_de_mesaDAO.buscarJuegosPorNumJugadores(1);
+                    mostrarJuegos(juegos);
+                } catch (SQLException ex) {
+                    textArea.setText("Error al buscar juegos: " + ex.getMessage());
+                }
+            }
+        });
         mnPorJugadores.add(mntmIndividual);
         
         JMenuItem mntmPara2 = new JMenuItem("Hasta 2 jugadores");
+        mntmPara2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    List<Juego_de_mesa> juegos = Juego_de_mesaDAO.buscarJuegosPorNumJugadores(2);
+                    mostrarJuegos(juegos);
+                } catch (SQLException ex) {
+                    textArea.setText("Error al buscar juegos: " + ex.getMessage());
+                }
+            }
+        });
         mnPorJugadores.add(mntmPara2);
         
         JMenuItem mntmPara4 = new JMenuItem("Hasta 4 jugadores");
+        mntmPara4.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    List<Juego_de_mesa> juegos = Juego_de_mesaDAO.buscarJuegosPorNumJugadores(4);
+                    mostrarJuegos(juegos);
+                } catch (SQLException ex) {
+                    textArea.setText("Error al buscar juegos: " + ex.getMessage());
+                }
+            }
+        });
         mnPorJugadores.add(mntmPara4);
         
         JMenuItem mntmPara6 = new JMenuItem("Hasta 6 jugadores");
+        mntmPara6.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    List<Juego_de_mesa> juegos = Juego_de_mesaDAO.buscarJuegosPorNumJugadores(6);
+                    mostrarJuegos(juegos);
+                } catch (SQLException ex) {
+                    textArea.setText("Error al buscar juegos: " + ex.getMessage());
+                }
+            }
+        });
         mnPorJugadores.add(mntmPara6);
         
         JMenuItem mntmPara8 = new JMenuItem("Para 8 o más jugadores");
+        mntmPara8.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    List<Juego_de_mesa> juegos = Juego_de_mesaDAO.buscarJuegosPorNumJugadores(8);
+                    mostrarJuegos(juegos);
+                } catch (SQLException ex) {
+                    textArea.setText("Error al buscar juegos: " + ex.getMessage());
+                }
+            }
+        });
         mnPorJugadores.add(mntmPara8);
 
         contentPane = new JPanel();
@@ -159,7 +210,7 @@ public class VenJDG extends JFrame {
         btnBuscar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    List<Juego_de_mesa> juegos = Juego_de_mesaDAO.obtenerTodosLosJuegos();
+                    List<Juego_de_mesa> juegos = Collections.singletonList(Juego_de_mesaDAO.obtenerJuegoPorNombre(textField.getText()));
                     mostrarJuegos(juegos);
                 } catch (SQLException ex) {
                     textArea.setText("Error al buscar juegos: " + ex.getMessage());
@@ -182,6 +233,20 @@ public class VenJDG extends JFrame {
         });
         btnRestablecer.setBounds(569, 99, 259, 31);
         contentPane.add(btnRestablecer);
+
+        JButton btnMasVendidos = new JButton("Top 10 Ventas");
+        btnMasVendidos.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try{
+                    List<Juego_de_mesa> juegos = Juego_de_mesaDAO.masVendidos();
+                    mostrarJuegos(juegos);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+        btnMasVendidos.setBounds(569, 141, 259, 31);
+        contentPane.add(btnMasVendidos);
         
         JButton btnVolver = new JButton("Volver");
         btnVolver.addActionListener(new ActionListener() {
@@ -205,13 +270,19 @@ public class VenJDG extends JFrame {
     
     private void mostrarJuegos(List<Juego_de_mesa> juegos) {
         StringBuilder sb = new StringBuilder();
-        for (Juego_de_mesa juego : juegos) {
-            sb.append("Nombre: ").append(juego.getNombre()).append("\n");
-            sb.append("Precio: ").append(juego.getPrecio()).append("€\n");
-            sb.append("Stock: ").append(juego.getStock()).append("\n");
-            sb.append("------------------\n");
+        if (juegos == null || juegos.isEmpty()) {
+            sb.append("No se encontraron juegos.");
+        } else {
+            for (Juego_de_mesa juego : juegos) {
+                if (juego != null) {
+                    sb.append("Nombre: ").append(juego.getNombre()).append("\n");
+                    sb.append("Precio: ").append(juego.getPrecio()).append("€\n");
+                    sb.append("Stock: ").append(juego.getStock()).append("\n");
+                    sb.append("------------------\n");
+                }
+            }
         }
         textArea.setText(sb.toString());
-        textArea.setCaretPosition(0); // Asegura que el scroll empiece desde arriba
+        textArea.setCaretPosition(0);
     }
 }

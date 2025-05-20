@@ -33,14 +33,14 @@ public class Juego_de_mesaDAO {
         return juegos;
     }
 
-    // Buscar juego por ID
-    public static Juego_de_mesa obtenerJuegoPorId(int id) throws SQLException {
-        String sql = "SELECT * FROM juegos_mesa WHERE id = ?";
+    // Buscar juego por nombre
+    public static Juego_de_mesa obtenerJuegoPorNombre(String nombre) throws SQLException {
+        String sql = "SELECT * FROM juegos_mesa WHERE nombre = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setInt(1, id);
+            pstmt.setString(1, nombre);
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
                     return new Juego_de_mesa(
@@ -130,6 +130,53 @@ public class Juego_de_mesaDAO {
                         rs.getInt("ventas")
                     ));
                 }
+            }
+        }
+        return juegos;
+    }
+
+    public static List<Juego_de_mesa> buscarJuegosPorNumJugadores(int numJugadores) throws SQLException {
+        List<Juego_de_mesa> juegos = new ArrayList<>();
+        String sql = "SELECT * FROM juegos_mesa WHERE numero_jugadores = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, numJugadores);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    juegos.add(new Juego_de_mesa(
+                        rs.getInt("id"),
+                        rs.getString("nombre"),
+                        rs.getInt("precio"),
+                        rs.getInt("stock"),
+                        rs.getString("genero"),
+                        rs.getInt("numero_jugadores"),
+                        rs.getInt("ventas")
+                    ));
+                }
+            }
+        }
+        return juegos;
+    }
+
+    public static List<Juego_de_mesa> masVendidos() throws SQLException {
+        List<Juego_de_mesa> juegos = new ArrayList<>();
+        String sql = "SELECT * FROM (SELECT * FROM juegos_mesa ORDER BY ventas DESC) WHERE ROWNUM <= 10";
+        try (Connection conn = DatabaseConnection.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                juegos.add(new Juego_de_mesa(
+                        rs.getInt("id"),
+                        rs.getString("nombre"),
+                        rs.getInt("precio"),
+                        rs.getInt("stock"),
+                        rs.getString("genero"),
+                        rs.getInt("numero_jugadores"),
+                        rs.getInt("ventas")
+                ));
             }
         }
         return juegos;

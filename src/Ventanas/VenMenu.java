@@ -71,6 +71,7 @@ public class VenMenu extends JFrame {
 		textCarrito.setBackground(new Color(192, 192, 192));
 		textCarrito.setBounds(10, 5, 183, 374);
 		panel_1.add(textCarrito);
+		textCarrito.setEditable(false);
 		
 		JLabel lblTotal = new JLabel("Total");
 		lblTotal.setFont(new Font("Tahoma", Font.PLAIN, 13));
