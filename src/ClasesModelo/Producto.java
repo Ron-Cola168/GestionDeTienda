@@ -2,21 +2,28 @@ package ClasesModelo;
 
 public class Producto {
 
+    private int ID;
     private String nombre;
     private int precio = 0;
-    private String tipo;
     private int stock;
+    private int ventas;
 
         //Constructor para Productos
-    public Producto(String nombre, int precio, String tipo, int stock){
+    public Producto(int id, String nombre, int precio, int stock, int ventas){
+        this.ID = id;
         this.nombre = nombre;
         this.precio = precio;
-        this.tipo = tipo;
         this.stock = stock;
+        this.ventas = ventas;
+
     };
 
 
         //Getters y setters
+    public int getID(){return this.ID;}
+
+    public void setID(int ID){this.ID = ID;}
+
     public String getNombre(){
         return this.nombre;
     }
@@ -33,19 +40,19 @@ public class Producto {
         this.precio = precio;
     }
 
-    public String getTipo(){
-        return this.tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
     public int getStock(){
         return this.stock;
     }
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    public int getVentas(){
+        return this.ventas;
+    }
+
+    public void setVentas(int ventas){
+        this.ventas = ventas;
     }
 }

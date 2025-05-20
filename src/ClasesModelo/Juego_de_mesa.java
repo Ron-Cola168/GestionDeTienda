@@ -2,23 +2,23 @@ package ClasesModelo;
 
 public class Juego_de_mesa extends Producto{
 
-    private String editorial;
+    private String genero;
     private int Numero_jugadores;
 
         //Constructor para Juego de Mesa
-    public Juego_de_mesa(String nombre, int precio,String tipo ,String editorial, int stock, int Numero_jugadores){
-        super(nombre, precio, tipo, stock);
-        this.editorial = editorial;
+    public Juego_de_mesa(int id, String nombre, int precio, int stock, String genero, int Numero_jugadores, int ventas){
+        super(id, nombre, precio, stock, ventas);
+        this.genero = genero;
         this.Numero_jugadores = Numero_jugadores;
     }
 
         //Setters y getters
     public String getEditorial(){
-        return this.editorial;
+        return this.genero;
     }
 
     public void setEditorial(String editorial) {
-        this.editorial = editorial;
+        this.genero = genero;
     }
 
     public int getNumero_jugadores() {
