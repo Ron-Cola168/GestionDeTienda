@@ -1,10 +1,8 @@
 package Ventanas;
 
-import ClasesDAO.EmpleadoDAO;
 import util.SesionEmpleado;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 
 import javax.swing.JFrame;
@@ -12,14 +10,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
-import java.awt.GridLayout;
 import java.awt.BorderLayout;
-import java.awt.GridBagLayout;
 import javax.swing.JTextArea;
-import java.awt.GridBagConstraints;
-import javax.swing.BoxLayout;
 import javax.swing.SwingConstants;
-import javax.swing.JSeparator;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -28,6 +21,10 @@ public class VenMenu extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
+	// Agregar al inicio de la clase
+	private static JTextArea textCarrito;
+	private static double total = 0.0;
+	private static JLabel lblTotal_1;
 
 
 	/**
@@ -52,7 +49,7 @@ public class VenMenu extends JFrame {
 		JButton btnJuegosMesa = new JButton("Juegos De mesa");
 		btnJuegosMesa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VenJDG venJGD = new VenJDG();
+				VenJDM venJGD = new VenJDM();
 				venJGD.setVisible(true);
 				dispose();
 			}
@@ -67,8 +64,9 @@ public class VenMenu extends JFrame {
 		panel_1.setBackground(new Color(199, 169, 139));
 		panel_1.setLayout(null);
 		
-		JTextArea textCarrito = new JTextArea();
-		textCarrito.setBackground(new Color(192, 192, 192));
+		// Modificar el constructor para asignar las variables
+		textCarrito = new JTextArea();
+		textCarrito.setBackground(new Color(255, 255, 255));
 		textCarrito.setBounds(10, 5, 183, 374);
 		panel_1.add(textCarrito);
 		textCarrito.setEditable(false);
@@ -94,7 +92,8 @@ public class VenMenu extends JFrame {
 		btnCobrar.setBounds(10, 409, 183, 33);
 		panel_1.add(btnCobrar);
 		
-		JLabel lblTotal_1 = new JLabel("");
+		// Modificar el constructor para asignar las variables
+		lblTotal_1 = new JLabel("0.00 €");
 		lblTotal_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblTotal_1.setBounds(136, 378, 57, 33);
 		panel_1.add(lblTotal_1);
@@ -179,5 +178,28 @@ public class VenMenu extends JFrame {
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		contentPane.add(lblTitulo, BorderLayout.NORTH);
+	}
+	
+	// Agregar método estático para manejar el carrito
+	public static void agregarAlCarrito(String producto) {
+	    if (textCarrito != null) {
+	        // Parsear el producto seleccionado para obtener el precio
+	        String[] lineas = producto.split("\n");
+	        String nombre = "";
+	        double precio = 0.0;
+	        
+	        for (String linea : lineas) {
+	            if (linea.startsWith("Nombre: ")) {
+	                nombre = linea.substring(8);
+	            } else if (linea.startsWith("Precio: ")) {
+	                precio = Double.parseDouble(linea.substring(8, linea.length() - 1));
+	            }
+	        }
+	        
+	        // Agregar al carrito
+	        textCarrito.append(nombre + " - " + precio + "€\n");
+	        total += precio;
+	        lblTotal_1.setText(String.format("%.2f €", total));
+	    }
 	}
 }

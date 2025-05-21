@@ -52,6 +52,7 @@ public class VenInventario extends JFrame {
 		JButton btnModificarExistencias = new JButton("Modificar existencias");
 		btnModificarExistencias.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
 			}
 		});
 		btnModificarExistencias.setBounds(35, 189, 449, 78);
@@ -60,6 +61,7 @@ public class VenInventario extends JFrame {
 		JButton btnBuscar = new JButton("Buscar producto");
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
 			}
 		});
 		btnBuscar.setBounds(266, 275, 218, 78);
@@ -74,9 +76,10 @@ public class VenInventario extends JFrame {
 		contentPane.add(btnListar);
 		
 		JTextPane textListaProductos = new JTextPane();
-		textListaProductos.setBackground(new Color(199, 199, 199));
+		textListaProductos.setBackground(new Color(255, 255, 255));
 		textListaProductos.setBounds(522, 88, 322, 418);
 		contentPane.add(textListaProductos);
+		textListaProductos.setEditable(false);
 		
 		JLabel lblTitulo = new JLabel("Inventario");
 		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 28));

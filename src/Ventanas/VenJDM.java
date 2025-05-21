@@ -2,7 +2,7 @@ package Ventanas;
 
 import ClasesDAO.Juego_de_mesaDAO;
 import ClasesModelo.Juego_de_mesa;
-import java.awt.EventQueue;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -20,14 +20,14 @@ import java.util.Collections;
 import java.util.List;
 import javax.swing.JScrollPane;
 
-public class VenJDG extends JFrame {
+public class VenJDM extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private JTextField textField;
     private JTextArea textArea;
     private JScrollPane scrollPane; // Añadimos esta variable como campo de la clase
 
-    public VenJDG() {
+    public VenJDM() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 870, 580);
         
@@ -188,12 +188,13 @@ public class VenJDG extends JFrame {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
-        
-        // Modificamos esta parte
+
         textArea = new JTextArea();
         textArea.setEditable(false);
-        textArea.setLineWrap(true); // Añadimos wrapping de línea
-        textArea.setWrapStyleWord(true); // Wrapping por palabras
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
+        textArea.setFocusable(true);
+        textArea.setEnabled(true);
         
         scrollPane = new JScrollPane(textArea);
         scrollPane.setBounds(10, 11, 462, 497);
@@ -248,6 +249,24 @@ public class VenJDG extends JFrame {
         btnMasVendidos.setBounds(569, 141, 259, 31);
         contentPane.add(btnMasVendidos);
         
+        // Boton para añadir al carro de compra
+        JButton btnAgregarCarrito = new JButton("Agregar al Carrito");
+        btnAgregarCarrito.setBounds(569, 183, 259, 31);
+        contentPane.add(btnAgregarCarrito);
+
+        btnAgregarCarrito.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+                String seleccion = textArea.getSelectedText();
+                if (seleccion != null && !seleccion.trim().isEmpty()) {
+                    VenMenu.agregarAlCarrito(seleccion);
+                } else {
+                    // Mostrar mensaje de que debe seleccionar un producto
+                    textArea.setText("Por favor, seleccione un producto para agregar al carrito");
+                }
+            }
+        });
+        
         JButton btnVolver = new JButton("Volver");
         btnVolver.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -277,7 +296,8 @@ public class VenJDG extends JFrame {
                 if (juego != null) {
                     sb.append("Nombre: ").append(juego.getNombre()).append("\n");
                     sb.append("Precio: ").append(juego.getPrecio()).append("€\n");
-                    sb.append("Stock: ").append(juego.getStock()).append("\n");
+                    sb.append("Genero: ").append(juego.getGenero()).append("\n");
+                    sb.append("Numero de Jugadores: ").append(juego.getNumeroJugadores()).append("\n");
                     sb.append("------------------\n");
                 }
             }

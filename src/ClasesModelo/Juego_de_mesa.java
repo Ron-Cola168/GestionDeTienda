@@ -13,19 +13,8 @@ public class Juego_de_mesa extends Producto{
     }
 
         //Setters y getters
-    public String getEditorial(){
-        return this.genero;
-    }
-
-    public void setEditorial(String editorial) {
-        this.genero = genero;
-    }
-
-    public int getNumero_jugadores() {
-        return Numero_jugadores;
-    }
-
-    public void setNumero_jugadores(int numero_jugadores) {
-        Numero_jugadores = numero_jugadores;
-    }
+    public String getGenero() {return this.genero;}
+    public void setGenero(String genero) {this.genero = genero;}
+    public int getNumeroJugadores() {return this.Numero_jugadores;}
+    public void setNumeroJugadores(int Numero_jugadores) {this.Numero_jugadores = Numero_jugadores;}
 }

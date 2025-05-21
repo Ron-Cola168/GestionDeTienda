@@ -69,8 +69,8 @@ public class Juego_de_mesaDAO {
             pstmt.setString(1, juego.getNombre());
             pstmt.setInt(2, juego.getPrecio());
             pstmt.setInt(3, juego.getStock());
-            pstmt.setString(4, juego.getEditorial()); // Nota: getEditorial() realmente obtiene el género
-            pstmt.setInt(5, juego.getNumero_jugadores());
+            pstmt.setString(4, juego.getGenero()); // Nota: getEditorial() realmente obtiene el género
+            pstmt.setInt(5, juego.getNumeroJugadores());
             pstmt.setInt(6, juego.getVentas());
 
             return pstmt.executeUpdate() > 0;
@@ -88,8 +88,8 @@ public class Juego_de_mesaDAO {
             pstmt.setString(1, juego.getNombre());
             pstmt.setInt(2, juego.getPrecio());
             pstmt.setInt(3, juego.getStock());
-            pstmt.setString(4, juego.getEditorial()); // Nota: getEditorial() realmente obtiene el género
-            pstmt.setInt(5, juego.getNumero_jugadores());
+            pstmt.setString(4, juego.getGenero()); // Nota: getEditorial() realmente obtiene el género
+            pstmt.setInt(5, juego.getNumeroJugadores());
             pstmt.setInt(6, juego.getVentas());
             pstmt.setInt(7, juego.getID());
 
