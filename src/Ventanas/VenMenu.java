@@ -115,7 +115,7 @@ public class VenMenu extends JFrame {
 				dispose();
 			}
 		});
-		btnInventario.setBounds(40, 298, 461, 40);
+		btnInventario.setBounds(354, 74, 147, 101);
 		panel.add(btnInventario);
 
 		/**Botones de administrador**/
@@ -126,7 +126,7 @@ public class VenMenu extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 				}
 			});
-			btngestionEmpleados.setBounds(40, 348, 461, 40);
+			btngestionEmpleados.setBounds(40, 186, 461, 101);
 			panel.add(btngestionEmpleados);
 		}
 
