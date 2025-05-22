@@ -63,8 +63,7 @@ public class VenMenu extends JFrame {
 		panel.add(panel_1);
 		panel_1.setBackground(new Color(199, 169, 139));
 		panel_1.setLayout(null);
-		
-		// Modificar el constructor para asignar las variables
+
 		textCarrito = new JTextArea();
 		textCarrito.setBackground(new Color(255, 255, 255));
 		textCarrito.setBounds(10, 5, 183, 374);
@@ -91,8 +90,7 @@ public class VenMenu extends JFrame {
 		});
 		btnCobrar.setBounds(10, 409, 183, 33);
 		panel_1.add(btnCobrar);
-		
-		// Modificar el constructor para asignar las variables
+
 		lblTotal_1 = new JLabel("0.00 €");
 		lblTotal_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblTotal_1.setBounds(136, 378, 57, 33);
@@ -101,57 +99,27 @@ public class VenMenu extends JFrame {
 		JButton btnTCG = new JButton("TCG");
 		btnTCG.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				VenTCG v1 = new VenTCG();
+				v1.setVisible(true);
+				dispose();
 			}
 		});
 		btnTCG.setBounds(197, 74, 147, 101);
 		panel.add(btnTCG);
-		
-		JButton btnTop10 = new JButton("TOP 10 MÁS VENDIDOS");
-		btnTop10.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnTop10.setBounds(354, 74, 147, 101);
-		panel.add(btnTop10);
-		
-		JButton btnComida = new JButton("Comida");
-		btnComida.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnComida.setBounds(40, 186, 147, 101);
-		panel.add(btnComida);
-		
-		JButton btnBebidas = new JButton("Bebidas");
-		btnBebidas.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnBebidas.setBounds(197, 186, 147, 101);
-		panel.add(btnBebidas);
-		
-		JButton btnZonaSocios = new JButton("Zona Socios");
-		btnZonaSocios.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnZonaSocios.setBounds(354, 186, 147, 101);
-		panel.add(btnZonaSocios);
 
+		JButton btnInventario = new JButton("Inventario");
+		btnInventario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VenInventario v1 = new VenInventario();
+				v1.setVisible(true);
+				dispose();
+			}
+		});
+		btnInventario.setBounds(40, 298, 461, 40);
+		panel.add(btnInventario);
 
 		/**Botones de administrador**/
 		if(SesionEmpleado.esAdmin()){
-
-			JButton btnInventario = new JButton("Inventario");
-			btnInventario.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					VenInventario v1 = new VenInventario();
-					v1.setVisible(true);
-					dispose();
-				}
-			});
-			btnInventario.setBounds(40, 298, 461, 40);
-			panel.add(btnInventario);
 
 			JButton btngestionEmpleados = new JButton("Gestionar Empleados");
 			btngestionEmpleados.addActionListener(new ActionListener() {

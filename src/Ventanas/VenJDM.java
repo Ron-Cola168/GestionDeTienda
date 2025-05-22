@@ -1,7 +1,7 @@
 package Ventanas;
 
-import ClasesDAO.Juego_de_mesaDAO;
-import ClasesModelo.Juego_de_mesa;
+import ClasesDAO.jdmDAO;
+import ClasesModelo.jdm;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -41,7 +41,7 @@ public class VenJDM extends JFrame {
         mntmRol.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    List<Juego_de_mesa> juegos = Juego_de_mesaDAO.buscarJuegosPorGenero("Rol");
+                    List<jdm> juegos = jdmDAO.buscarJuegosPorGenero("Rol");
                     mostrarJuegos(juegos);
                 } catch (SQLException ex) {
                     textArea.setText("Error al buscar juegos: " + ex.getMessage());
@@ -54,7 +54,7 @@ public class VenJDM extends JFrame {
         mntmCooperativo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    List<Juego_de_mesa> juegos = Juego_de_mesaDAO.buscarJuegosPorGenero("Cooperativo");
+                    List<jdm> juegos = jdmDAO.buscarJuegosPorGenero("Cooperativo");
                     mostrarJuegos(juegos);
                 } catch (SQLException ex) {
                     textArea.setText("Error al buscar juegos: " + ex.getMessage());
@@ -67,7 +67,7 @@ public class VenJDM extends JFrame {
         mntmCompetitivo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    List<Juego_de_mesa> juegos = Juego_de_mesaDAO.buscarJuegosPorGenero("Competitivo");
+                    List<jdm> juegos = jdmDAO.buscarJuegosPorGenero("Competitivo");
                     mostrarJuegos(juegos);
                 } catch (SQLException ex) {
                     textArea.setText("Error al buscar juegos: " + ex.getMessage());
@@ -80,7 +80,7 @@ public class VenJDM extends JFrame {
         mntmEstrategia.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    List<Juego_de_mesa> juegos = Juego_de_mesaDAO.buscarJuegosPorGenero("Estrategia");
+                    List<jdm> juegos = jdmDAO.buscarJuegosPorGenero("Estrategia");
                     mostrarJuegos(juegos);
                 } catch (SQLException ex) {
                     textArea.setText("Error al buscar juegos: " + ex.getMessage());
@@ -93,7 +93,7 @@ public class VenJDM extends JFrame {
         mntmFamiliares.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    List<Juego_de_mesa> juegos = Juego_de_mesaDAO.buscarJuegosPorGenero("Familiares");
+                    List<jdm> juegos = jdmDAO.buscarJuegosPorGenero("Familiares");
                     mostrarJuegos(juegos);
                 } catch (SQLException ex) {
                     textArea.setText("Error al buscar juegos: " + ex.getMessage());
@@ -106,7 +106,7 @@ public class VenJDM extends JFrame {
         mntmMisterio.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    List<Juego_de_mesa> juegos = Juego_de_mesaDAO.buscarJuegosPorGenero("Misterio");
+                    List<jdm> juegos = jdmDAO.buscarJuegosPorGenero("Misterio");
                     mostrarJuegos(juegos);
                 } catch (SQLException ex) {
                     textArea.setText("Error al buscar juegos: " + ex.getMessage());
@@ -122,7 +122,7 @@ public class VenJDM extends JFrame {
         mntmIndividual.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    List<Juego_de_mesa> juegos = Juego_de_mesaDAO.buscarJuegosPorNumJugadores(1);
+                    List<jdm> juegos = jdmDAO.buscarJuegosPorNumJugadores(1);
                     mostrarJuegos(juegos);
                 } catch (SQLException ex) {
                     textArea.setText("Error al buscar juegos: " + ex.getMessage());
@@ -135,7 +135,7 @@ public class VenJDM extends JFrame {
         mntmPara2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    List<Juego_de_mesa> juegos = Juego_de_mesaDAO.buscarJuegosPorNumJugadores(2);
+                    List<jdm> juegos = jdmDAO.buscarJuegosPorNumJugadores(2);
                     mostrarJuegos(juegos);
                 } catch (SQLException ex) {
                     textArea.setText("Error al buscar juegos: " + ex.getMessage());
@@ -148,7 +148,7 @@ public class VenJDM extends JFrame {
         mntmPara4.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    List<Juego_de_mesa> juegos = Juego_de_mesaDAO.buscarJuegosPorNumJugadores(4);
+                    List<jdm> juegos = jdmDAO.buscarJuegosPorNumJugadores(4);
                     mostrarJuegos(juegos);
                 } catch (SQLException ex) {
                     textArea.setText("Error al buscar juegos: " + ex.getMessage());
@@ -161,7 +161,7 @@ public class VenJDM extends JFrame {
         mntmPara6.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    List<Juego_de_mesa> juegos = Juego_de_mesaDAO.buscarJuegosPorNumJugadores(6);
+                    List<jdm> juegos = jdmDAO.buscarJuegosPorNumJugadores(6);
                     mostrarJuegos(juegos);
                 } catch (SQLException ex) {
                     textArea.setText("Error al buscar juegos: " + ex.getMessage());
@@ -174,7 +174,7 @@ public class VenJDM extends JFrame {
         mntmPara8.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    List<Juego_de_mesa> juegos = Juego_de_mesaDAO.buscarJuegosPorNumJugadores(8);
+                    List<jdm> juegos = jdmDAO.buscarJuegosPorNumJugadores(8);
                     mostrarJuegos(juegos);
                 } catch (SQLException ex) {
                     textArea.setText("Error al buscar juegos: " + ex.getMessage());
@@ -211,7 +211,7 @@ public class VenJDM extends JFrame {
         btnBuscar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    List<Juego_de_mesa> juegos = Collections.singletonList(Juego_de_mesaDAO.obtenerJuegoPorNombre(textField.getText()));
+                    List<jdm> juegos = Collections.singletonList(jdmDAO.obtenerJuegoPorNombre(textField.getText()));
                     mostrarJuegos(juegos);
                 } catch (SQLException ex) {
                     textArea.setText("Error al buscar juegos: " + ex.getMessage());
@@ -225,7 +225,7 @@ public class VenJDM extends JFrame {
         btnRestablecer.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    List<Juego_de_mesa> juegos = Juego_de_mesaDAO.obtenerTodosLosJuegos();
+                    List<jdm> juegos = jdmDAO.obtenerTodosLosJuegos();
                     mostrarJuegos(juegos);
                 } catch (SQLException ex) {
                     textArea.setText("Error al buscar juegos: " + ex.getMessage());
@@ -239,7 +239,7 @@ public class VenJDM extends JFrame {
         btnMasVendidos.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try{
-                    List<Juego_de_mesa> juegos = Juego_de_mesaDAO.masVendidos();
+                    List<jdm> juegos = jdmDAO.masVendidos();
                     mostrarJuegos(juegos);
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
@@ -280,19 +280,19 @@ public class VenJDM extends JFrame {
 
         // Mostrar todos los juegos al iniciar
         try {
-            List<Juego_de_mesa> juegos = Juego_de_mesaDAO.obtenerTodosLosJuegos();
+            List<jdm> juegos = jdmDAO.obtenerTodosLosJuegos();
             mostrarJuegos(juegos);
         } catch (SQLException ex) {
             textArea.setText("Error al cargar los juegos: " + ex.getMessage());
         }
     }
     
-    private void mostrarJuegos(List<Juego_de_mesa> juegos) {
+    private void mostrarJuegos(List<jdm> juegos) {
         StringBuilder sb = new StringBuilder();
         if (juegos == null || juegos.isEmpty()) {
             sb.append("No se encontraron juegos.");
         } else {
-            for (Juego_de_mesa juego : juegos) {
+            for (jdm juego : juegos) {
                 if (juego != null) {
                     sb.append("Nombre: ").append(juego.getNombre()).append("\n");
                     sb.append("Precio: ").append(juego.getPrecio()).append("€\n");

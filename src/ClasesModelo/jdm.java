@@ -1,12 +1,12 @@
 package ClasesModelo;
 
-public class Juego_de_mesa extends Producto{
+public class jdm extends Producto{
 
     private String genero;
     private int Numero_jugadores;
 
         //Constructor para Juego de Mesa
-    public Juego_de_mesa(int id, String nombre, int precio, int stock, String genero, int Numero_jugadores, int ventas){
+    public jdm(int id, String nombre, int precio, int stock, String genero, int Numero_jugadores, int ventas){
         super(id, nombre, precio, stock, ventas);
         this.genero = genero;
         this.Numero_jugadores = Numero_jugadores;
