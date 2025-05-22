@@ -114,8 +114,8 @@ public class VenTCG extends JFrame {
         btnMasVendidos.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try{
-                    List<TCG> juegos = TCGDAO.masVendidos();
-                    mostrarJuegos(juegos);
+                    List<TCG> TCG = TCGDAO.masVendidos();
+                    mostrarJuegos(TCG);
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -171,8 +171,7 @@ public class VenTCG extends JFrame {
                 if (juego != null) {
                     sb.append("Nombre: ").append(juego.getNombre()).append("\n");
                     sb.append("Precio: ").append(juego.getPrecio()).append("€\n");
-                    sb.append("Tipo: ").append(juego.getDescripcion()).append("\n");
-                    sb.append("Descripcion: ").append(juego.getTipo()).append("\n");
+                    sb.append("Tipo: ").append(juego.getTipo()).append("\n");
                     sb.append("------------------\n");
                 }
             }

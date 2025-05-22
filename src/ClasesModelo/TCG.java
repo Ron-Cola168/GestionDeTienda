@@ -3,16 +3,14 @@ package ClasesModelo;
 public class TCG extends Producto{
 
     String tipo;
-    String descripcion;
+    String juego;
 
-    public TCG(int id, String nombre, int precio, String tipo, String descripcion, int stock, int ventas){
+    public TCG(int id,String nombre, int precio, int stock, int ventas, String tipo, String juego){
         super(id, nombre, precio, stock, ventas);
         this.tipo = tipo;
-        this.descripcion = descripcion;
+        this.juego = juego;
     }
 
     public String getTipo(){return this.tipo;}
     public void setTipo(String tipo){this.tipo = tipo;}
-    public String getDescripcion(){return this.descripcion;}
-    public void setDescripcion(String descripcion){this.descripcion = descripcion;}
 }
