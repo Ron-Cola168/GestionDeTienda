@@ -114,8 +114,8 @@ public class VenTCG extends JFrame {
         btnMasVendidos.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try{
-                    List<TCG> juegos = TCGDAO.masVendidos();
-                    mostrarJuegos(juegos);
+                    List<TCG> TCG = TCGDAO.masVendidos();
+                    mostrarJuegos(TCG);
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
