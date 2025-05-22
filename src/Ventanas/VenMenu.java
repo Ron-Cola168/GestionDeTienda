@@ -1,10 +1,8 @@
 package Ventanas;
 
-import ClasesDAO.EmpleadoDAO;
 import util.SesionEmpleado;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 
 import javax.swing.JFrame;
@@ -12,14 +10,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
-import java.awt.GridLayout;
 import java.awt.BorderLayout;
-import java.awt.GridBagLayout;
 import javax.swing.JTextArea;
-import java.awt.GridBagConstraints;
-import javax.swing.BoxLayout;
 import javax.swing.SwingConstants;
-import javax.swing.JSeparator;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -28,6 +21,10 @@ public class VenMenu extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
+	// Agregar al inicio de la clase
+	private static JTextArea textCarrito;
+	private static double total = 0.0;
+	private static JLabel lblTotal_1;
 
 
 	/**
@@ -52,7 +49,7 @@ public class VenMenu extends JFrame {
 		JButton btnJuegosMesa = new JButton("Juegos De mesa");
 		btnJuegosMesa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VenJDG venJGD = new VenJDG();
+				VenJDM venJGD = new VenJDM();
 				venJGD.setVisible(true);
 				dispose();
 			}
@@ -66,9 +63,9 @@ public class VenMenu extends JFrame {
 		panel.add(panel_1);
 		panel_1.setBackground(new Color(199, 169, 139));
 		panel_1.setLayout(null);
-		
-		JTextArea textCarrito = new JTextArea();
-		textCarrito.setBackground(new Color(192, 192, 192));
+
+		textCarrito = new JTextArea();
+		textCarrito.setBackground(new Color(255, 255, 255));
 		textCarrito.setBounds(10, 5, 183, 374);
 		panel_1.add(textCarrito);
 		textCarrito.setEditable(false);
@@ -93,8 +90,8 @@ public class VenMenu extends JFrame {
 		});
 		btnCobrar.setBounds(10, 409, 183, 33);
 		panel_1.add(btnCobrar);
-		
-		JLabel lblTotal_1 = new JLabel("");
+
+		lblTotal_1 = new JLabel("0.00 €");
 		lblTotal_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblTotal_1.setBounds(136, 378, 57, 33);
 		panel_1.add(lblTotal_1);
@@ -102,57 +99,27 @@ public class VenMenu extends JFrame {
 		JButton btnTCG = new JButton("TCG");
 		btnTCG.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				VenTCG v1 = new VenTCG();
+				v1.setVisible(true);
+				dispose();
 			}
 		});
 		btnTCG.setBounds(197, 74, 147, 101);
 		panel.add(btnTCG);
-		
-		JButton btnTop10 = new JButton("TOP 10 MÁS VENDIDOS");
-		btnTop10.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnTop10.setBounds(354, 74, 147, 101);
-		panel.add(btnTop10);
-		
-		JButton btnComida = new JButton("Comida");
-		btnComida.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnComida.setBounds(40, 186, 147, 101);
-		panel.add(btnComida);
-		
-		JButton btnBebidas = new JButton("Bebidas");
-		btnBebidas.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnBebidas.setBounds(197, 186, 147, 101);
-		panel.add(btnBebidas);
-		
-		JButton btnZonaSocios = new JButton("Zona Socios");
-		btnZonaSocios.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnZonaSocios.setBounds(354, 186, 147, 101);
-		panel.add(btnZonaSocios);
 
+		JButton btnInventario = new JButton("Inventario");
+		btnInventario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VenInventario v1 = new VenInventario();
+				v1.setVisible(true);
+				dispose();
+			}
+		});
+		btnInventario.setBounds(40, 298, 461, 40);
+		panel.add(btnInventario);
 
 		/**Botones de administrador**/
 		if(SesionEmpleado.esAdmin()){
-
-			JButton btnInventario = new JButton("Inventario");
-			btnInventario.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					VenInventario v1 = new VenInventario();
-					v1.setVisible(true);
-					dispose();
-				}
-			});
-			btnInventario.setBounds(40, 298, 461, 40);
-			panel.add(btnInventario);
 
 			JButton btngestionEmpleados = new JButton("Gestionar Empleados");
 			btngestionEmpleados.addActionListener(new ActionListener() {
@@ -179,5 +146,28 @@ public class VenMenu extends JFrame {
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		contentPane.add(lblTitulo, BorderLayout.NORTH);
+	}
+	
+	// Agregar método estático para manejar el carrito
+	public static void agregarAlCarrito(String producto) {
+	    if (textCarrito != null) {
+	        // Parsear el producto seleccionado para obtener el precio
+	        String[] lineas = producto.split("\n");
+	        String nombre = "";
+	        double precio = 0.0;
+	        
+	        for (String linea : lineas) {
+	            if (linea.startsWith("Nombre: ")) {
+	                nombre = linea.substring(8);
+	            } else if (linea.startsWith("Precio: ")) {
+	                precio = Double.parseDouble(linea.substring(8, linea.length() - 1));
+	            }
+	        }
+	        
+	        // Agregar al carrito
+	        textCarrito.append(nombre + " - " + precio + "€\n");
+	        total += precio;
+	        lblTotal_1.setText(String.format("%.2f €", total));
+	    }
 	}
 }
