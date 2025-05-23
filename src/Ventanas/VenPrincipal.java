@@ -31,6 +31,11 @@ import javax.swing.JTable;
 
 public class VenPrincipal extends JFrame {
 
+	//Credenciales de inicio de sesión
+	//Admin seg1@magicas.es psg234
+	//noAdmin san33@magicas.es 1234
+
+
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textCorreo;

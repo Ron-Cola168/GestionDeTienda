@@ -25,7 +25,7 @@ public class VenJDM extends JFrame {
     private JPanel contentPane;
     private JTextField textField;
     private JTextArea textArea;
-    private JScrollPane scrollPane; // Añadimos esta variable como campo de la clase
+    private JScrollPane scrollPane;
 
     public VenJDM() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
