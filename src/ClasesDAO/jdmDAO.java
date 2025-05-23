@@ -60,54 +60,53 @@ public class jdmDAO {
 
     // Insertar nuevo juego
     public static boolean insertarJuego(jdm juego) throws SQLException {
-        String sql = "INSERT INTO juegos_mesa (nombre, precio, stock, genero, numero_jugadores, ventas) " +
-                    "VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO juegos_mesa (nombre, precio, stock, genero, numero_Jugadores, ventas) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, juego.getNombre());
-            pstmt.setInt(2, juego.getPrecio());
+            pstmt.setDouble(2, juego.getPrecio());
             pstmt.setInt(3, juego.getStock());
-            pstmt.setString(4, juego.getGenero()); // Nota: getEditorial() realmente obtiene el género
+            pstmt.setString(4, juego.getGenero());
             pstmt.setInt(5, juego.getNumeroJugadores());
             pstmt.setInt(6, juego.getVentas());
 
-            return pstmt.executeUpdate() > 0;
-        }
-    }
-
-    // Actualizar juego existente
-    public static boolean actualizarJuego(jdm juego) throws SQLException {
-        String sql = "UPDATE juegos_mesa SET nombre = ?, precio = ?, stock = ?, " +
-                    "genero = ?, numero_jugadores = ?, ventas = ? WHERE id = ?";
-
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            pstmt.setString(1, juego.getNombre());
-            pstmt.setInt(2, juego.getPrecio());
-            pstmt.setInt(3, juego.getStock());
-            pstmt.setString(4, juego.getGenero()); // Nota: getEditorial() realmente obtiene el género
-            pstmt.setInt(5, juego.getNumeroJugadores());
-            pstmt.setInt(6, juego.getVentas());
-            pstmt.setInt(7, juego.getID());
-
-            return pstmt.executeUpdate() > 0;
+            int filasAfectadas = pstmt.executeUpdate();
+            return filasAfectadas > 0;
         }
     }
 
     // Eliminar juego
-    public static boolean eliminarJuego(int id) throws SQLException {
-        String sql = "DELETE FROM juegos_mesa WHERE id = ?";
+    public static boolean eliminarJuego(String nombre) throws SQLException {
+        String sql = "DELETE FROM juegos_mesa WHERE nombre = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setInt(1, id);
-            return pstmt.executeUpdate() > 0;
+            pstmt.setString(1, nombre);
+            int filasAfectadas = pstmt.executeUpdate();
+            return filasAfectadas > 0;
         }
     }
+
+    public static boolean actualizarJuego(jdm juego) throws SQLException {
+        String sql = "UPDATE juegos_mesa SET precio = ?, stock = ?, genero = ?, numero_Jugadores = ? WHERE nombre = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setDouble(1, juego.getPrecio());
+            pstmt.setInt(2, juego.getStock());
+            pstmt.setString(3, juego.getGenero());
+            pstmt.setInt(4, juego.getNumeroJugadores());
+            pstmt.setString(5, juego.getNombre());
+
+            int filasAfectadas = pstmt.executeUpdate();
+            return filasAfectadas > 0;
+        }
+    }
+
 
     // Buscar juegos por género
     public static List<jdm> buscarJuegosPorGenero(String genero) throws SQLException {

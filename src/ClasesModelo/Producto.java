@@ -18,6 +18,14 @@ public class Producto {
 
     };
 
+    public Producto(String nombre, int precio, int stock, int ventas){
+        this.nombre = nombre;
+        this.precio = precio;
+        this.stock = stock;
+        this.ventas = ventas;
+
+    };
+
 
         //Getters y setters
     public int getID(){return this.ID;}
