@@ -72,6 +72,110 @@ public class VenTCG extends JFrame {
         JMenuItem mntmMYGO = new JMenuItem("Mazos");
         mnNewMenu.add(mntmMYGO);
 
+        // Añadir estos listeners después de crear los elementos del menú
+
+        // Magic: The Gathering
+        mntmSMTG.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    List<TCG> TCG = TCGDAO.buscarPorJuegoYTipo("MTG", "sobre");
+                    mostrarJuegos(TCG);
+                } catch (SQLException ex) {
+                    textArea.setText("Error al buscar sobres de Magic: " + ex.getMessage());
+                }
+            }
+        });
+
+        mntmCMTG.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    List<TCG> TCG = TCGDAO.buscarPorJuegoYTipo("MTG", "caja");
+                    mostrarJuegos(TCG);
+                } catch (SQLException ex) {
+                    textArea.setText("Error al buscar cajas de Magic: " + ex.getMessage());
+                }
+            }
+        });
+
+        mntmMMTG.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    List<TCG> TCG = TCGDAO.buscarPorJuegoYTipo("MTG", "mazo");
+                    mostrarJuegos(TCG);
+                } catch (SQLException ex) {
+                    textArea.setText("Error al buscar mazos de Magic: " + ex.getMessage());
+                }
+            }
+        });
+
+        // Pokémon
+        mntmSPKM.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    List<TCG> TCG = TCGDAO.buscarPorJuegoYTipo("Pokemon TCG", "sobre");
+                    mostrarJuegos(TCG);
+                } catch (SQLException ex) {
+                    textArea.setText("Error al buscar sobres de Pokemon: " + ex.getMessage());
+                }
+            }
+        });
+
+        mntmCPKM.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    List<TCG> TCG = TCGDAO.buscarPorJuegoYTipo("Pokemon TCG", "caja");
+                    mostrarJuegos(TCG);
+                } catch (SQLException ex) {
+                    textArea.setText("Error al buscar cajas de Pokemon: " + ex.getMessage());
+                }
+            }
+        });
+
+        mntmMPKM.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    List<TCG> TCG = TCGDAO.buscarPorJuegoYTipo("Pokemon TCG", "mazo");
+                    mostrarJuegos(TCG);
+                } catch (SQLException ex) {
+                    textArea.setText("Error al buscar mazos de Pokemon: " + ex.getMessage());
+                }
+            }
+        });
+
+        // Yu-Gi-Oh!
+        mntmSYGO.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    List<TCG> TCG = TCGDAO.buscarPorJuegoYTipo("Yu-Gi-Oh!", "sobre");
+                    mostrarJuegos(TCG);
+                } catch (SQLException ex) {
+                    textArea.setText("Error al buscar sobres de Yu-Gi-Oh!: " + ex.getMessage());
+                }
+            }
+        });
+
+        mntmCYGO.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    List<TCG> TCG = TCGDAO.buscarPorJuegoYTipo("Yu-Gi-Oh!", "caja");
+                    mostrarJuegos(TCG);
+                } catch (SQLException ex) {
+                    textArea.setText("Error al buscar cajas de Yu-Gi-Oh!: " + ex.getMessage());
+                }
+            }
+        });
+
+        mntmMYGO.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    List<TCG> TCG = TCGDAO.buscarPorJuegoYTipo("Yu-Gi-Oh!", "mazo");
+                    mostrarJuegos(TCG);
+                } catch (SQLException ex) {
+                    textArea.setText("Error al buscar mazos de Yu-Gi-Oh!: " + ex.getMessage());
+                }
+            }
+        });
+
         contentPane = new JPanel();
         contentPane.setBackground(new Color(199, 169, 139));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -90,11 +194,6 @@ public class VenTCG extends JFrame {
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         contentPane.add(scrollPane);
-        
-        textField = new JTextField();
-        textField.setBounds(559, 13, 279, 31);
-        contentPane.add(textField);
-        textField.setColumns(10);
         
         JButton btnRestablecer = new JButton("Restablecer");
         btnRestablecer.addActionListener(new ActionListener() {
@@ -123,25 +222,7 @@ public class VenTCG extends JFrame {
         });
         btnMasVendidos.setBounds(569, 141, 259, 31);
         contentPane.add(btnMasVendidos);
-        
-        // Boton para añadir al carro de compra
-        JButton btnAgregarCarrito = new JButton("Agregar al Carrito");
-        btnAgregarCarrito.setBounds(569, 183, 259, 31);
-        contentPane.add(btnAgregarCarrito);
 
-        btnAgregarCarrito.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-
-                String seleccion = textArea.getSelectedText();
-                if (seleccion != null && !seleccion.trim().isEmpty()) {
-                    VenMenu.agregarAlCarrito(seleccion);
-                } else {
-                    // Mostrar mensaje de que debe seleccionar un producto
-                    textArea.setText("Por favor, seleccione un producto para agregar al carrito");
-                }
-            }
-        });
-        
         JButton btnVolver = new JButton("Volver");
         btnVolver.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

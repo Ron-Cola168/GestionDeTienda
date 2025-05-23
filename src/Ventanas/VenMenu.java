@@ -1,5 +1,6 @@
 package Ventanas;
 
+import util.Carrito;
 import util.SesionEmpleado;
 
 import java.awt.Color;
@@ -17,14 +18,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class VenMenu extends JFrame {
-
-	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
-
-	// Agregar al inicio de la clase
-	private static JTextArea textCarrito;
-	private static double total = 0.0;
-	private static JLabel lblTotal_1;
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
+    private static JTextArea textCarrito;
+    private static JLabel lblTotal_1;
+    private static Carrito carrito;
 
 
 	/**
@@ -51,7 +49,7 @@ public class VenMenu extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				VenJDM venJGD = new VenJDM();
 				venJGD.setVisible(true);
-				dispose();
+				setVisible(false);
 			}
 		});
 		btnJuegosMesa.setBounds(40, 74, 147, 101);
@@ -101,7 +99,7 @@ public class VenMenu extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				VenTCG v1 = new VenTCG();
 				v1.setVisible(true);
-				dispose();
+				setVisible(false);
 			}
 		});
 		btnTCG.setBounds(197, 74, 147, 101);
@@ -112,7 +110,7 @@ public class VenMenu extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				VenInventario v1 = new VenInventario();
 				v1.setVisible(true);
-				dispose();
+				setVisible(false);
 			}
 		});
 		btnInventario.setBounds(354, 74, 147, 101);
@@ -146,28 +144,34 @@ public class VenMenu extends JFrame {
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		contentPane.add(lblTitulo, BorderLayout.NORTH);
+		
+		carrito = new Carrito(textCarrito, lblTotal_1);
 	}
 	
-	// Agregar método estático para manejar el carrito
-	public static void agregarAlCarrito(String producto) {
-	    if (textCarrito != null) {
-	        // Parsear el producto seleccionado para obtener el precio
-	        String[] lineas = producto.split("\n");
-	        String nombre = "";
-	        double precio = 0.0;
-	        
-	        for (String linea : lineas) {
-	            if (linea.startsWith("Nombre: ")) {
-	                nombre = linea.substring(8);
-	            } else if (linea.startsWith("Precio: ")) {
-	                precio = Double.parseDouble(linea.substring(8, linea.length() - 1));
-	            }
-	        }
-	        
-	        // Agregar al carrito
-	        textCarrito.append(nombre + " - " + precio + "€\n");
-	        total += precio;
-	        lblTotal_1.setText(String.format("%.2f €", total));
-	    }
-	}
+	
+/**public static void agregarAlCarrito(String producto) {
+    if (carrito != null) {
+        try {
+            String[] lineas = producto.split("\n");
+            String nombre = "";
+            double precio = 0.0;
+            
+            for (String linea : lineas) {
+                if (linea.startsWith("Nombre: ")) {
+                    nombre = linea.substring("Nombre: ".length()).trim();
+                } else if (linea.startsWith("Precio: ")) {
+                    String precioStr = linea.substring("Precio: ".length())
+                                         .replace("€", "").trim();
+                    precio = Double.parseDouble(precioStr);
+                }
+            }
+            
+            if (!nombre.isEmpty() && precio > 0) {
+                carrito.agregarItem(nombre, precio);
+            }
+        } catch (Exception e) {
+            System.out.println("Error al procesar el producto: " + e.getMessage());
+        }
+    }
+}**/
 }
