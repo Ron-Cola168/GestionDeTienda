@@ -222,25 +222,7 @@ public class VenTCG extends JFrame {
         });
         btnMasVendidos.setBounds(569, 141, 259, 31);
         contentPane.add(btnMasVendidos);
-        
-        // Boton para añadir al carro de compra
-        JButton btnAgregarCarrito = new JButton("Agregar al Carrito");
-        btnAgregarCarrito.setBounds(559, 13, 259, 31);
-        contentPane.add(btnAgregarCarrito);
 
-        btnAgregarCarrito.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-
-                String seleccion = textArea.getSelectedText();
-                if (seleccion != null && !seleccion.trim().isEmpty()) {
-                    VenMenu.agregarAlCarrito(seleccion);
-                } else {
-                    // Mostrar mensaje de que debe seleccionar un producto
-                    textArea.setText("Por favor, seleccione un producto para agregar al carrito");
-                }
-            }
-        });
-        
         JButton btnVolver = new JButton("Volver");
         btnVolver.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

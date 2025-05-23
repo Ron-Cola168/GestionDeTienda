@@ -57,12 +57,12 @@ public class TCGDAO {
     }
 public static List<TCG> buscarPorJuegoYTipo(String juego, String tipo) throws SQLException {
     List<TCG> tcgs = new ArrayList<>();
-    String sql = "SELECT * FROM tcg WHERE LOWER(nombre) LIKE LOWER(?) AND LOWER(tipo) = LOWER(?)";
+    String sql = "SELECT * FROM tcg WHERE LOWER(juego) = LOWER(?) AND LOWER(tipo) = LOWER(?)";
 
     try (Connection conn = DatabaseConnection.getConnection();
          PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-        pstmt.setString(1, "%" + juego + "%");
+        pstmt.setString(1, juego);
         pstmt.setString(2, tipo);
         
         try (ResultSet rs = pstmt.executeQuery()) {
