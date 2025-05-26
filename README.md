@@ -81,16 +81,7 @@ jdbc:oracle:thin:@<service_name>?TNS_ADMIN=/ruta/a/tu/wallet
      db.password=contraseña
      ```
 
-3. **Compila el proyecto:**
 
-   - Si usas Maven:
-     ```bash
-     mvn clean compile
-     ```
-   - Si usas Gradle:
-     ```bash
-     gradle build
-     ```
    - O compila manualmente (asegúrate de incluir el driver JDBC en el classpath):
      ```bash
      javac -cp ".;lib/ojdbc8.jar" src/**/*.java
