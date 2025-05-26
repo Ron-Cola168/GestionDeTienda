@@ -28,16 +28,7 @@ cd GestionDeTienda
 
 ### 3. Configuración de Oracle Wallet (si aplica)
 
-Si la conexión a Oracle requiere Wallet:
 
-1. Descarga el Wallet desde el panel de Oracle Cloud o solicítalo al administrador de tu base de datos.
-2. Extrae el contenido del ZIP del Wallet en un directorio seguro de tu equipo.
-3. Configura la conexión en tu aplicación Java utilizando la ruta al Wallet (normalmente referenciada en el archivo `tnsnames.ora` y `sqlnet.ora`).
-4. Ejemplo de cadena de conexión usando Wallet:
-
-   ```
-   jdbc:oracle:thin:@<TNS_ALIAS>?TNS_ADMIN=/ruta/al/wallet
-   ```
 
 ### 4. Configuración de la Base de Datos
 
@@ -46,20 +37,7 @@ Si la conexión a Oracle requiere Wallet:
 
 ### 5. Ejecución de la Aplicación
 
-1. Compila el proyecto (ajusta la ruta según tu estructura):
-
-   ```bash
-   javac -cp "lib/ojdbc8.jar" src/*.java
-   ```
-
-2. Ejecuta la aplicación (ajusta si tu clase principal tiene otro nombre):
-
-   ```bash
-   java -cp ".:lib/ojdbc8.jar:src/" Main
-   ```
-
-   > En Windows usa `;` en lugar de `:` para separar rutas en el classpath.
-
+Compila el proyecto .java desde tu IDE (el que estes usando) en nuestro caso IntelliJ.
 ---
 
 ## Notas adicionales
