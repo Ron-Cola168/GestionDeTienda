@@ -4,7 +4,7 @@ Magicas: El Encuentro
 
 ## 📝 Descripción del Proyecto
 
-Una descripción concisa y clara de tu proyecto. ¿Qué problema resuelve? ¿Qué funcionalidad ofrece? ¿Cuál es su propósito principal? Incluye aquí cualquier característica destacada o el valor que aporta.
+En este proyecto cuyos participamos Pablo Segura González y Gonzalo Benítez Díaz. Nuestro proyecto llamado "Magicas: El Encuentro" consta de la gestión de una tienda la cual servirá de gran ayuda a los dependientes de la tienda para 
 
 ---
 
