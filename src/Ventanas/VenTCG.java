@@ -19,62 +19,73 @@ import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JScrollPane;
 
+/**
+ * Ventana que permite a los usuarios explorar y buscar Tarjetas Coleccionables (TCG)
+ * por juego y tipo (sobres, cajas, mazos), así como ver las más vendidas.
+ */
 public class VenTCG extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private JTextField textField;
     private JTextArea textArea;
-    private JScrollPane scrollPane; // Añadimos esta variable como campo de la clase
+    private JScrollPane scrollPane;
 
+    /**
+     * Constructor de la ventana de Tarjetas Coleccionables. Inicializa la interfaz gráfica
+     * con menús para filtrar por juego y tipo de producto, y botones para restablecer
+     * la lista y ver los más vendidos.
+     */
     public VenTCG() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 870, 580);
-        
+
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
-        
+
+        // Menú principal para seleccionar el juego de TCG
         JMenu mnMenuJDM = new JMenu("Juego");
         menuBar.add(mnMenuJDM);
-        
+
+        // Submenú para Magic: The Gathering
         JMenu mnMTG = new JMenu("Magic: The Gathering");
         mnMenuJDM.add(mnMTG);
-        
+
         JMenuItem mntmSMTG = new JMenuItem("Sobres");
         mnMTG.add(mntmSMTG);
-        
+
         JMenuItem mntmCMTG = new JMenuItem("Cajas");
         mnMTG.add(mntmCMTG);
-        
+
         JMenuItem mntmMMTG = new JMenuItem("Mazos");
         mnMTG.add(mntmMMTG);
-        
+
+        // Submenú para Pokémon TCG
         JMenu mnPokemon = new JMenu("Pokémon");
         mnMenuJDM.add(mnPokemon);
-        
+
         JMenuItem mntmSPKM = new JMenuItem("Sobres");
         mnPokemon.add(mntmSPKM);
-        
+
         JMenuItem mntmCPKM = new JMenuItem("Cajas");
         mnPokemon.add(mntmCPKM);
-        
+
         JMenuItem mntmMPKM = new JMenuItem("Mazos");
         mnPokemon.add(mntmMPKM);
-        
+
+        // Submenú para Yu-Gi-Oh!
         JMenu mnNewMenu = new JMenu("Yu-Gi-Oh!");
         mnMenuJDM.add(mnNewMenu);
-        
+
         JMenuItem mntmSYGO = new JMenuItem("Sobres");
         mnNewMenu.add(mntmSYGO);
-        
+
         JMenuItem mntmCYGO = new JMenuItem("Cajas");
         mnNewMenu.add(mntmCYGO);
-        
+
         JMenuItem mntmMYGO = new JMenuItem("Mazos");
         mnNewMenu.add(mntmMYGO);
 
-        // Añadir estos listeners después de crear los elementos del menú
-
-        // Magic: The Gathering
+        // ActionListeners para los items del menú de Magic: The Gathering
         mntmSMTG.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -108,7 +119,7 @@ public class VenTCG extends JFrame {
             }
         });
 
-        // Pokémon
+        // ActionListeners para los items del menú de Pokémon TCG
         mntmSPKM.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -142,7 +153,7 @@ public class VenTCG extends JFrame {
             }
         });
 
-        // Yu-Gi-Oh!
+        // ActionListeners para los items del menú de Yu-Gi-Oh!
         mntmSYGO.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -182,19 +193,21 @@ public class VenTCG extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
+        // Área de texto para mostrar la lista de tarjetas TCG
         textArea = new JTextArea();
         textArea.setEditable(false);
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
         textArea.setFocusable(true);
         textArea.setEnabled(true);
-        
+
         scrollPane = new JScrollPane(textArea);
         scrollPane.setBounds(10, 11, 462, 497);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         contentPane.add(scrollPane);
-        
+
+        // Botón para restablecer la lista y mostrar todas las tarjetas TCG
         JButton btnRestablecer = new JButton("Restablecer");
         btnRestablecer.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -209,6 +222,7 @@ public class VenTCG extends JFrame {
         btnRestablecer.setBounds(569, 99, 259, 31);
         contentPane.add(btnRestablecer);
 
+        // Botón para mostrar las 10 tarjetas TCG más vendidas
         JButton btnMasVendidos = new JButton("Top 10 Ventas");
         btnMasVendidos.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -216,13 +230,14 @@ public class VenTCG extends JFrame {
                     List<TCG> TCG = TCGDAO.masVendidos();
                     mostrarJuegos(TCG);
                 } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
+                    textArea.setText("Error al obtener los más vendidos: " + ex.getMessage());
                 }
             }
         });
         btnMasVendidos.setBounds(569, 141, 259, 31);
         contentPane.add(btnMasVendidos);
 
+        // Botón para volver al menú principal
         JButton btnVolver = new JButton("Volver");
         btnVolver.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -234,7 +249,7 @@ public class VenTCG extends JFrame {
         btnVolver.setBounds(569, 477, 259, 31);
         contentPane.add(btnVolver);
 
-        // Mostrar todos los juegos al iniciar
+        // Mostrar todas las tarjetas TCG al iniciar la ventana
         try {
             List<TCG> Cartas = TCGDAO.obtenerTCGS();
             mostrarJuegos(Cartas);
@@ -242,7 +257,12 @@ public class VenTCG extends JFrame {
             textArea.setText("Error al cargar los juegos: " + ex.getMessage());
         }
     }
-    
+
+    /**
+     * Formatea y muestra la lista de tarjetas coleccionables en el área de texto.
+     *
+     * @param juegos La lista de objetos {@link TCG} a mostrar.
+     */
     private void mostrarJuegos(List<TCG> juegos) {
         StringBuilder sb = new StringBuilder();
         if (juegos == null || juegos.isEmpty()) {
@@ -253,6 +273,7 @@ public class VenTCG extends JFrame {
                     sb.append("Nombre: ").append(juego.getNombre()).append("\n");
                     sb.append("Precio: ").append(juego.getPrecio()).append("€\n");
                     sb.append("Tipo: ").append(juego.getTipo()).append("\n");
+                    sb.append("Juego: ").append(juego.getJuego()).append("\n");
                     sb.append("------------------\n");
                 }
             }

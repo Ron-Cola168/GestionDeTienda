@@ -7,10 +7,14 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Dimension; // Importar Dimension
+import java.awt.Dimension;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Ventana para la gestión de empleados.
+ * Permite insertar, actualizar, eliminar y listar empleados del sistema.
+ */
 public class VenEmpleados extends JFrame {
 
     private static final long serialVersionUID = 1L;
@@ -18,6 +22,9 @@ public class VenEmpleados extends JFrame {
     private JTextPane textListaEmpleados;
     private JScrollPane scrollPane;
 
+    /**
+     * Crea una nueva ventana para la gestión de empleados.
+     */
     public VenEmpleados() {
         setResizable(false);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -29,69 +36,63 @@ public class VenEmpleados extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        // Inicializar JTextPane y JScrollPane
+        // Área de texto donde se listan los empleados
         textListaEmpleados = new JTextPane();
         textListaEmpleados.setEditable(false);
         scrollPane = new JScrollPane(textListaEmpleados);
         scrollPane.setBounds(522, 88, 322, 418);
         contentPane.add(scrollPane);
 
-        // Título
+        // Título de la ventana
         JLabel lblTitulo = new JLabel("Gestión de Empleados");
         lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 28));
         lblTitulo.setBounds(280, 11, 310, 78);
         contentPane.add(lblTitulo);
 
-        // Panel para Empleados
+        // Panel que contiene los botones de gestión de empleados
         JPanel panelEmpleados = new JPanel();
-        // Ajustar el tamaño del panel para que contenga los botones correctamente
-        panelEmpleados.setBounds(35, 88, 449, 200); // Ancho del botón VOLVER
+        panelEmpleados.setBounds(35, 88, 449, 200);
         panelEmpleados.setBackground(new Color(199, 169, 139));
         contentPane.add(panelEmpleados);
         panelEmpleados.setLayout(null);
 
-        // Definir las dimensiones deseadas para todos los botones
-        // Basado en el ancho y alto del botón VOLVER (449, 38)
+        // Dimensiones comunes para los botones
         int buttonWidth = 449;
         int buttonHeight = 38;
         Dimension commonButtonSize = new Dimension(buttonWidth, buttonHeight);
-
-        // Botones para Empleados
-        JButton btnInsertarEmpleado = new JButton("Insertar Empleado");
-        JButton btnActualizarEmpleado = new JButton("Actualizar Empleado");
-        JButton btnEliminarEmpleado = new JButton("Eliminar Empleado");
-        JButton btnListarEmpleados = new JButton("Listar Empleados");
-
-        // Botón Volver
-        JButton btnVolver = new JButton("VOLVER");
-        btnVolver.setBounds(35, 300, buttonWidth, buttonHeight); // Usar las dimensiones comunes
-        contentPane.add(btnVolver);
-
-        // Establecer las mismas dimensiones y posiciones para los botones de gestión
         int yOffset = 0;
         int verticalSpacing = 10; // Espacio vertical entre botones
 
+        // Botones para las operaciones con empleados
+        JButton btnInsertarEmpleado = new JButton("Insertar Empleado");
         btnInsertarEmpleado.setBounds(0, yOffset, commonButtonSize.width, commonButtonSize.height);
         panelEmpleados.add(btnInsertarEmpleado);
         yOffset += commonButtonSize.height + verticalSpacing;
 
+        JButton btnActualizarEmpleado = new JButton("Actualizar Empleado");
         btnActualizarEmpleado.setBounds(0, yOffset, commonButtonSize.width, commonButtonSize.height);
         panelEmpleados.add(btnActualizarEmpleado);
         yOffset += commonButtonSize.height + verticalSpacing;
 
+        JButton btnEliminarEmpleado = new JButton("Eliminar Empleado");
         btnEliminarEmpleado.setBounds(0, yOffset, commonButtonSize.width, commonButtonSize.height);
         panelEmpleados.add(btnEliminarEmpleado);
         yOffset += commonButtonSize.height + verticalSpacing;
 
+        JButton btnListarEmpleados = new JButton("Listar Empleados");
         btnListarEmpleados.setBounds(0, yOffset, commonButtonSize.width, commonButtonSize.height);
         panelEmpleados.add(btnListarEmpleados);
 
-        // ActionListeners (estos siempre deben ir después de la inicialización de los botones)
+        // Botón para volver al menú principal
+        JButton btnVolver = new JButton("VOLVER");
+        btnVolver.setBounds(35, 300, buttonWidth, buttonHeight);
+        contentPane.add(btnVolver);
+
+        // Asignación de las acciones a los botones
         btnInsertarEmpleado.addActionListener(e -> mostrarDialogoInsertarEmpleado());
         btnActualizarEmpleado.addActionListener(e -> mostrarDialogoActualizarEmpleado());
         btnEliminarEmpleado.addActionListener(e -> mostrarDialogoEliminarEmpleado());
         btnListarEmpleados.addActionListener(e -> listarEmpleados());
-
         btnVolver.addActionListener(e -> {
             VenMenu v1 = new VenMenu();
             v1.setVisible(true);
@@ -99,6 +100,9 @@ public class VenEmpleados extends JFrame {
         });
     }
 
+    /**
+     * Carga y muestra la lista de todos los empleados en el área de texto.
+     */
     private void listarEmpleados() {
         try {
             List<Empleado> empleados = EmpleadoDAO.obtenerTodosLosEmpleados();
@@ -108,6 +112,9 @@ public class VenEmpleados extends JFrame {
         }
     }
 
+    /**
+     * Muestra un diálogo para insertar un nuevo empleado.
+     */
     private void mostrarDialogoInsertarEmpleado() {
         JDialog dialogoInsertarEmpleado = new JDialog(this, "Insertar Empleado", true);
         dialogoInsertarEmpleado.getContentPane().setLayout(new BoxLayout(dialogoInsertarEmpleado.getContentPane(), BoxLayout.Y_AXIS));
@@ -134,7 +141,6 @@ public class VenEmpleados extends JFrame {
                 String tipoEmpleado = txtTipoEmpleado.getText();
                 String contrasena = new String(txtContrasena.getPassword());
 
-                // Creamos el nuevo empleado pasando null para el correo, ya que se genera automáticamente
                 Empleado nuevoEmpleado = new Empleado(0, nombre, apellidos, null, tipoEmpleado, contrasena);
                 if (EmpleadoDAO.insertarEmpleado(nuevoEmpleado)) {
                     JOptionPane.showMessageDialog(this, "Empleado insertado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
@@ -154,6 +160,9 @@ public class VenEmpleados extends JFrame {
         dialogoInsertarEmpleado.setVisible(true);
     }
 
+    /**
+     * Muestra un diálogo para eliminar un empleado por su ID.
+     */
     private void mostrarDialogoEliminarEmpleado() {
         String idStr = JOptionPane.showInputDialog(this, "Ingrese el ID del empleado a eliminar:");
         if (idStr != null && !idStr.trim().isEmpty()) {
@@ -176,6 +185,9 @@ public class VenEmpleados extends JFrame {
         }
     }
 
+    /**
+     * Muestra un diálogo para actualizar la información de un empleado existente.
+     */
     private void mostrarDialogoActualizarEmpleado() {
         String idStr = JOptionPane.showInputDialog(this, "Ingrese el ID del empleado a actualizar:");
         if (idStr != null && !idStr.trim().isEmpty()) {
@@ -192,16 +204,13 @@ public class VenEmpleados extends JFrame {
 
                 JTextField txtNombre = new JTextField(empleadoExistente.getNombre(), 20);
                 JTextField txtApellidos = new JTextField(empleadoExistente.getApellidos(), 20);
-                // JTextField txtCorreo = new JTextField(empleadoExistente.getCorreo(), 20); // Eliminado
                 JTextField txtTipoEmpleado = new JTextField(empleadoExistente.getTipoEmpleado(), 20);
-                JPasswordField txtContrasena = new JPasswordField(empleadoExistente.getContraseña(), 20);
+                JPasswordField txtContrasena = new JPasswordField(empleadoExistente.getContrasenia(), 20);
 
                 dialogoActualizarEmpleado.add(new JLabel("Nombre:"));
                 dialogoActualizarEmpleado.add(txtNombre);
                 dialogoActualizarEmpleado.add(new JLabel("Apellidos:"));
                 dialogoActualizarEmpleado.add(txtApellidos);
-                // dialogoActualizarEmpleado.add(new JLabel("Correo:")); // Eliminado
-                // dialogoActualizarEmpleado.add(txtCorreo); // Eliminado
                 dialogoActualizarEmpleado.add(new JLabel("Tipo de Empleado:"));
                 dialogoActualizarEmpleado.add(txtTipoEmpleado);
                 dialogoActualizarEmpleado.add(new JLabel("Contraseña:"));
@@ -212,15 +221,14 @@ public class VenEmpleados extends JFrame {
                     try {
                         String nuevoNombre = txtNombre.getText();
                         String nuevosApellidos = txtApellidos.getText();
-                        // String nuevoCorreo = txtCorreo.getText(); // Eliminado
                         String nuevoTipoEmpleado = txtTipoEmpleado.getText();
                         String nuevaContrasena = new String(txtContrasena.getPassword());
 
                         empleadoExistente.setNombre(nuevoNombre);
                         empleadoExistente.setApellidos(nuevosApellidos);
-                        empleadoExistente.setCorreo(null); // Establecer a null o no modificar si se genera automáticamente
+                        empleadoExistente.setCorreo(null); // Se mantiene el correo original o se podría permitir modificarlo
                         empleadoExistente.setTipoEmpleado(nuevoTipoEmpleado);
-                        empleadoExistente.setContraseña(nuevaContrasena);
+                        empleadoExistente.setContrasenia(nuevaContrasena);
 
                         if (EmpleadoDAO.actualizarEmpleado(empleadoExistente)) {
                             JOptionPane.showMessageDialog(this, "Empleado con ID " + idBuscar + " actualizado correctamente.");
@@ -247,6 +255,11 @@ public class VenEmpleados extends JFrame {
         }
     }
 
+    /**
+     * Muestra la lista de empleados en el área de texto.
+     *
+     * @param empleados La lista de objetos {@link Empleado} a mostrar.
+     */
     private void mostrarEmpleados(List<Empleado> empleados) {
         StringBuilder sb = new StringBuilder();
         sb.append("=== EMPLEADOS ===\n\n");
@@ -260,11 +273,15 @@ public class VenEmpleados extends JFrame {
             sb.append("------------------\n");
         }
         textListaEmpleados.setText(sb.toString());
-        textListaEmpleados.setCaretPosition(0);
+        textListaEmpleados.setCaretPosition(0); // Volver al inicio del texto
     }
 
+    /**
+     * Muestra un mensaje de error en el área de texto.
+     *
+     * @param mensaje El mensaje de error a mostrar.
+     */
     private void mostrarError(String mensaje) {
         textListaEmpleados.setText("ERROR: " + mensaje);
     }
-
 }

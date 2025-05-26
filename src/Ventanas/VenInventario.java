@@ -12,12 +12,24 @@ import java.awt.Font;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Ventana que permite visualizar y gestionar el inventario de la tienda,
+ * mostrando tanto Juegos de Mesa (jdm) como Tarjetas Coleccionables (TCG).
+ * Ofrece funcionalidades para listar, insertar, actualizar y eliminar productos
+ * de ambas categorías.
+ */
+
 public class VenInventario extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private JTextPane textListaProductos;
     private JScrollPane scrollPane;
+
+    /**
+     * Constructor de la ventana de inventario. Inicializa la interfaz gráfica
+     * y los listeners de los botones.
+     */
 
     public VenInventario() {
         setResizable(false);
@@ -127,6 +139,10 @@ public class VenInventario extends JFrame {
         });
     }
 
+    /**
+     * Obtiene y muestra la lista de todos los juegos de mesa desde la base de datos.
+     */
+
     private void listarJuegosDeMesa() {
         try {
             List<jdm> juegos = jdmDAO.obtenerTodosLosJuegos();
@@ -136,6 +152,10 @@ public class VenInventario extends JFrame {
         }
     }
 
+    /**
+     * Obtiene y muestra la lista de todas las tarjetas coleccionables desde la base de datos.
+     */
+
     private void listarTCG() {
         try {
             List<TCG> tcgs = TCGDAO.obtenerTCGS();
@@ -144,6 +164,10 @@ public class VenInventario extends JFrame {
             mostrarError("Error al cargar las cartas TCG: " + ex.getMessage());
         }
     }
+
+    /**
+     * Muestra un diálogo modal para insertar un nuevo juego de mesa.
+     */
 
     private void mostrarDialogoInsertarJDM() {
         JDialog dialogoInsertarJDM = new JDialog(this, "Insertar Juego de Mesa", true);
@@ -194,6 +218,10 @@ public class VenInventario extends JFrame {
         dialogoInsertarJDM.setVisible(true);
     }
 
+    /**
+     * Muestra un diálogo modal para eliminar un juego de mesa por su nombre.
+     */
+
     private void mostrarDialogoEliminarJDM() {
         String nombreEliminar = JOptionPane.showInputDialog(this, "Ingrese el nombre del juego de mesa a eliminar:");
         if (nombreEliminar != null && !nombreEliminar.trim().isEmpty()) {
@@ -209,6 +237,10 @@ public class VenInventario extends JFrame {
             }
         }
     }
+
+    /**
+     * Muestra un diálogo modal para actualizar la información de un juego de mesa existente.
+     */
 
     private void mostrarDialogoActualizarJDM() {
         String nombreBuscar = JOptionPane.showInputDialog(this, "Ingrese el nombre del juego de mesa a actualizar:");
@@ -277,6 +309,10 @@ public class VenInventario extends JFrame {
         }
     }
 
+    /**
+     * Muestra un diálogo modal para insertar una nueva carta TCG.
+     */
+
     private void mostrarDialogoInsertarTCG() {
         JDialog dialogoInsertarTCG = new JDialog(this, "Insertar TCG", true);
         dialogoInsertarTCG.getContentPane().setLayout(new BoxLayout(dialogoInsertarTCG.getContentPane(), BoxLayout.Y_AXIS));
@@ -325,6 +361,10 @@ public class VenInventario extends JFrame {
         dialogoInsertarTCG.setVisible(true);
     }
 
+    /**
+     * Muestra un diálogo modal para eliminar una carta TCG por su nombre.
+     */
+
     private void mostrarDialogoEliminarTCG() {
         String nombreEliminar = JOptionPane.showInputDialog(this, "Ingrese el nombre de la carta TCG a eliminar:");
         if (nombreEliminar != null && !nombreEliminar.trim().isEmpty()) {
@@ -340,6 +380,10 @@ public class VenInventario extends JFrame {
             }
         }
     }
+
+    /**
+     * Muestra un diálogo modal para actualizar la información de una carta TCG existente.
+     */
 
     private void mostrarDialogoActualizarTCG() {
         String nombreBuscar = JOptionPane.showInputDialog(this, "Ingrese el nombre de la carta TCG a actualizar:");
@@ -404,6 +448,13 @@ public class VenInventario extends JFrame {
         }
     }
 
+
+    /**
+     * Formatea y muestra la lista de juegos de mesa en el área de texto.
+     *
+     * @param juegos La lista de objetos {@link jdm} a mostrar.
+     */
+
     private void mostrarJDM(List<jdm> juegos) {
         StringBuilder sb = new StringBuilder();
         sb.append("=== JUEGOS DE MESA ===\n\n");
@@ -420,6 +471,12 @@ public class VenInventario extends JFrame {
         textListaProductos.setCaretPosition(0);
     }
 
+    /**
+     * Formatea y muestra la lista de productos TCG en el área de texto.
+     *
+     * @param tcgs La lista de objetos {@link TCG} a mostrar.
+     */
+
     private void mostrarTCG(List<TCG> tcgs) {
         StringBuilder sb = new StringBuilder();
         sb.append("=== CARTAS COLECCIONABLES ===\n\n");
@@ -435,6 +492,12 @@ public class VenInventario extends JFrame {
         textListaProductos.setText(sb.toString());
         textListaProductos.setCaretPosition(0);
     }
+
+    /**
+     * Obtiene y muestra la lista combinada de todos los juegos de mesa y cartas TCG.
+     *
+     * @throws SQLException Si ocurre un error al acceder a la base de datos.
+     */
 
     private void mostrarInventarioCompleto() throws SQLException {
         List<jdm> juegos = jdmDAO.obtenerTodosLosJuegos();
@@ -468,6 +531,12 @@ public class VenInventario extends JFrame {
         textListaProductos.setText(sb.toString());
         textListaProductos.setCaretPosition(0);
     }
+
+    /**
+     * Muestra un mensaje de error en el área de texto de la ventana.
+     *
+     * @param mensaje El mensaje de error a mostrar.
+     */
 
     private void mostrarError(String mensaje) {
         textListaProductos.setText("ERROR: " + mensaje);

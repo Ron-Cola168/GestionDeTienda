@@ -8,11 +8,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Clase de acceso a datos (DAO) para la entidad {@link TCG} (Tarjeta Coleccionable).
+ * Proporciona métodos para interactuar con la tabla 'TCG' en la base de datos,
+ * permitiendo obtener, buscar, insertar, eliminar y actualizar información de las cartas TCG.
+ */
 public class TCGDAO {
 
     /**
-     * Obtiene todas las cartas TCG de la base de datos.
-     * @return Una lista de objetos TCG.
+     * Obtiene todas las cartas TCG almacenadas en la base de datos.
+     *
+     * @return Una {@link List} de objetos {@link TCG}, donde cada objeto representa una carta TCG.
+     * Si no hay cartas en la base de datos, la lista estará vacía.
      * @throws SQLException Si ocurre un error al acceder a la base de datos.
      */
     public static List<TCG> obtenerTCGS() throws SQLException {
@@ -39,13 +46,15 @@ public class TCGDAO {
     }
 
     /**
-     * Obtiene las 10 cartas TCG más vendidas.
-     * @return Una lista de los 10 objetos TCG más vendidos.
+     * Obtiene las 10 cartas TCG más vendidas, ordenadas por el número de ventas de forma descendente.
+     *
+     * @return Una {@link List} de los 10 objetos {@link TCG} más vendidos.
+     * Si hay menos de 10 cartas, devolverá todas las disponibles ordenadas por ventas.
      * @throws SQLException Si ocurre un error al acceder a la base de datos.
      */
     public static List<TCG> masVendidos() throws SQLException {
         List<TCG> tcgList = new ArrayList<>();
-        String sql = "SELECT id, nombre, precio, stock, ventas, tipo, juego FROM TCG ORDER BY ventas DESC FETCH FIRST 10 ROWS ONLY"; // Sintaxis más moderna para LIMIT
+        String sql = "SELECT id, nombre, precio, stock, ventas, tipo, juego FROM TCG ORDER BY ventas DESC FETCH FIRST 10 ROWS ONLY"; // Sintaxis para obtener los primeros 10
 
         try (Connection conn = DatabaseConnection.getConnection();
              Statement stmt = conn.createStatement();
@@ -67,10 +76,13 @@ public class TCGDAO {
     }
 
     /**
-     * Busca cartas TCG por juego y tipo (sin distinguir mayúsculas/minúsculas).
-     * @param juego El nombre del juego.
-     * @param tipo El tipo de carta.
-     * @return Una lista de objetos TCG que coinciden con el juego y el tipo.
+     * Busca cartas TCG que coincidan con un juego y un tipo específicos.
+     * La búsqueda no distingue entre mayúsculas y minúsculas.
+     *
+     * @param juego El nombre del juego de las cartas a buscar.
+     * @param tipo  El tipo de carta a buscar (ej., criatura, hechizo).
+     * @return Una {@link List} de objetos {@link TCG} que pertenecen al juego y tienen el tipo especificados.
+     * Si no se encuentran cartas, la lista estará vacía.
      * @throws SQLException Si ocurre un error al acceder a la base de datos.
      */
     public static List<TCG> buscarPorJuegoYTipo(String juego, String tipo) throws SQLException {
@@ -102,8 +114,9 @@ public class TCGDAO {
 
     /**
      * Inserta una nueva carta TCG en la base de datos.
-     * @param tcg El objeto TCG a insertar.
-     * @return true si la inserción fue exitosa, false en caso contrario.
+     *
+     * @param tcg El objeto {@link TCG} que contiene la información de la carta a insertar.
+     * @return {@code true} si la inserción fue exitosa, {@code false} en caso contrario.
      * @throws SQLException Si ocurre un error al acceder a la base de datos.
      */
     public static boolean insertarTCG(TCG tcg) throws SQLException {
@@ -125,9 +138,10 @@ public class TCGDAO {
     }
 
     /**
-     * Elimina una carta TCG de la base de datos por su nombre.
+     * Elimina una carta TCG de la base de datos basándose en su nombre exacto.
+     *
      * @param nombre El nombre de la carta TCG a eliminar.
-     * @return true si la eliminación fue exitosa, false en caso contrario.
+     * @return {@code true} si la eliminación fue exitosa, {@code false} en caso contrario.
      * @throws SQLException Si ocurre un error al acceder a la base de datos.
      */
     public static boolean eliminarTCG(String nombre) throws SQLException {
@@ -143,9 +157,11 @@ public class TCGDAO {
     }
 
     /**
-     * Actualiza la información de una carta TCG en la base de datos.
-     * @param tcg El objeto TCG con la información actualizada.
-     * @return true si la actualización fue exitosa, false en caso contrario.
+     * Actualiza la información de una carta TCG existente en la base de datos.
+     * La búsqueda de la carta a actualizar se realiza por su nombre.
+     *
+     * @param tcg El objeto {@link TCG} con la información actualizada de la carta.
+     * @return {@code true} si la actualización fue exitosa, {@code false} en caso contrario.
      * @throws SQLException Si ocurre un error al acceder a la base de datos.
      */
     public static boolean actualizarTCG(TCG tcg) throws SQLException {
@@ -166,9 +182,11 @@ public class TCGDAO {
     }
 
     /**
-     * Obtiene una carta TCG por su nombre (usando Streams para simplificar).
-     * @param nombreBuscar El nombre de la carta a buscar.
-     * @return El objeto TCG encontrado, o null si no se encuentra.
+     * Obtiene una carta TCG de la base de datos por su nombre exacto.
+     * Utiliza Streams para simplificar la búsqueda en la lista obtenida de la base de datos.
+     *
+     * @param nombreBuscar El nombre de la carta TCG a buscar.
+     * @return El objeto {@link TCG} encontrado, o {@code null} si no se encuentra ninguna carta con ese nombre.
      */
     public static TCG obtenerTCGPorNombre(String nombreBuscar) {
         try {

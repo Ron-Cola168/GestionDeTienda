@@ -20,6 +20,10 @@ import java.util.Collections;
 import java.util.List;
 import javax.swing.JScrollPane;
 
+/**
+ * Ventana que permite a los usuarios explorar y buscar Juegos de Mesa (JDM)
+ * por género, número de jugadores, nombre y ver los más vendidos.
+ */
 public class VenJDM extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
@@ -27,16 +31,22 @@ public class VenJDM extends JFrame {
     private JTextArea textArea;
     private JScrollPane scrollPane;
 
+    /**
+     * Constructor de la ventana de Juegos de Mesa. Inicializa la interfaz gráfica
+     * con menús para filtrar por género y número de jugadores, un campo de texto
+     * para buscar por nombre y botones para restablecer la lista y ver los más vendidos.
+     */
     public VenJDM() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 870, 580);
-        
+
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
-        
+
+        // Menú para filtrar juegos por género
         JMenu mnMenuJDM = new JMenu("Generos");
         menuBar.add(mnMenuJDM);
-        
+
         JMenuItem mntmRol = new JMenuItem("Rol");
         mntmRol.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -49,7 +59,7 @@ public class VenJDM extends JFrame {
             }
         });
         mnMenuJDM.add(mntmRol);
-        
+
         JMenuItem mntmCooperativo = new JMenuItem("Cooperativo");
         mntmCooperativo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -62,7 +72,7 @@ public class VenJDM extends JFrame {
             }
         });
         mnMenuJDM.add(mntmCooperativo);
-        
+
         JMenuItem mntmCompetitivo = new JMenuItem("Competitivo");
         mntmCompetitivo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -75,7 +85,7 @@ public class VenJDM extends JFrame {
             }
         });
         mnMenuJDM.add(mntmCompetitivo);
-        
+
         JMenuItem mntmEstrategia = new JMenuItem("Estrategia");
         mntmEstrategia.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -88,7 +98,7 @@ public class VenJDM extends JFrame {
             }
         });
         mnMenuJDM.add(mntmEstrategia);
-        
+
         JMenuItem mntmFamiliares = new JMenuItem("Familiares");
         mntmFamiliares.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -101,7 +111,7 @@ public class VenJDM extends JFrame {
             }
         });
         mnMenuJDM.add(mntmFamiliares);
-        
+
         JMenuItem mntmMisterio = new JMenuItem("Misterio");
         mntmMisterio.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -114,10 +124,11 @@ public class VenJDM extends JFrame {
             }
         });
         mnMenuJDM.add(mntmMisterio);
-        
+
+        // Menú para filtrar juegos por número de jugadores
         JMenu mnPorJugadores = new JMenu("Numero de jugadores");
         menuBar.add(mnPorJugadores);
-        
+
         JMenuItem mntmIndividual = new JMenuItem("Para 1 jugador");
         mntmIndividual.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -130,7 +141,7 @@ public class VenJDM extends JFrame {
             }
         });
         mnPorJugadores.add(mntmIndividual);
-        
+
         JMenuItem mntmPara2 = new JMenuItem("Hasta 2 jugadores");
         mntmPara2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -143,7 +154,7 @@ public class VenJDM extends JFrame {
             }
         });
         mnPorJugadores.add(mntmPara2);
-        
+
         JMenuItem mntmPara4 = new JMenuItem("Hasta 4 jugadores");
         mntmPara4.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -156,7 +167,7 @@ public class VenJDM extends JFrame {
             }
         });
         mnPorJugadores.add(mntmPara4);
-        
+
         JMenuItem mntmPara6 = new JMenuItem("Hasta 6 jugadores");
         mntmPara6.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -169,7 +180,7 @@ public class VenJDM extends JFrame {
             }
         });
         mnPorJugadores.add(mntmPara6);
-        
+
         JMenuItem mntmPara8 = new JMenuItem("Para 8 o más jugadores");
         mntmPara8.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -189,24 +200,27 @@ public class VenJDM extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
+        // Área de texto para mostrar la lista de juegos
         textArea = new JTextArea();
         textArea.setEditable(false);
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
         textArea.setFocusable(true);
         textArea.setEnabled(true);
-        
+
         scrollPane = new JScrollPane(textArea);
         scrollPane.setBounds(10, 11, 462, 497);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         contentPane.add(scrollPane);
-        
+
+        // Campo de texto para buscar juegos por nombre
         textField = new JTextField();
         textField.setBounds(559, 13, 279, 31);
         contentPane.add(textField);
         textField.setColumns(10);
-        
+
+        // Botón para buscar juegos por el nombre ingresado
         JButton btnBuscar = new JButton("Buscar");
         btnBuscar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -220,7 +234,8 @@ public class VenJDM extends JFrame {
         });
         btnBuscar.setBounds(569, 57, 259, 31);
         contentPane.add(btnBuscar);
-        
+
+        // Botón para restablecer la lista y mostrar todos los juegos
         JButton btnRestablecer = new JButton("Restablecer");
         btnRestablecer.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -235,6 +250,7 @@ public class VenJDM extends JFrame {
         btnRestablecer.setBounds(569, 99, 259, 31);
         contentPane.add(btnRestablecer);
 
+        // Botón para mostrar los 10 juegos más vendidos
         JButton btnMasVendidos = new JButton("Top 10 Ventas");
         btnMasVendidos.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -242,13 +258,14 @@ public class VenJDM extends JFrame {
                     List<jdm> juegos = jdmDAO.masVendidos();
                     mostrarJuegos(juegos);
                 } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
+                    textArea.setText("Error al obtener los más vendidos: " + ex.getMessage());
                 }
             }
         });
         btnMasVendidos.setBounds(569, 141, 259, 31);
         contentPane.add(btnMasVendidos);
-        
+
+        // Botón para volver al menú principal
         JButton btnVolver = new JButton("Volver");
         btnVolver.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -260,7 +277,7 @@ public class VenJDM extends JFrame {
         btnVolver.setBounds(569, 477, 259, 31);
         contentPane.add(btnVolver);
 
-        // Mostrar todos los juegos al iniciar
+        // Mostrar todos los juegos al iniciar la ventana
         try {
             List<jdm> juegos = jdmDAO.obtenerTodosLosJuegos();
             mostrarJuegos(juegos);
@@ -268,7 +285,12 @@ public class VenJDM extends JFrame {
             textArea.setText("Error al cargar los juegos: " + ex.getMessage());
         }
     }
-    
+
+    /**
+     * Formatea y muestra la lista de juegos de mesa en el área de texto.
+     *
+     * @param juegos La lista de objetos {@link jdm} a mostrar.
+     */
     private void mostrarJuegos(List<jdm> juegos) {
         StringBuilder sb = new StringBuilder();
         if (juegos == null || juegos.isEmpty()) {

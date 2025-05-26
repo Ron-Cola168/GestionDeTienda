@@ -11,6 +11,12 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * Ventana principal de la aplicación, que ofrece acceso a las secciones de
+ * Juegos de Mesa, Tarjetas Coleccionables e Inventario. También incluye
+ * funcionalidades para la gestión de empleados (solo para administradores),
+ * un carrito de compras y la opción de cerrar sesión.
+ */
 public class VenMenu extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -18,6 +24,11 @@ public class VenMenu extends JFrame {
 	private static JLabel lblTotal_1;
 	private static Carrito carrito;
 
+	/**
+	 * Constructor de la ventana del menú principal. Inicializa la interfaz de usuario,
+	 * incluyendo los botones para acceder a las diferentes secciones de la aplicación,
+	 * el panel del carrito de compras y el botón para cerrar la sesión.
+	 */
 	public VenMenu() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -28,12 +39,14 @@ public class VenMenu extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 
-		JPanel panel = new JPanel(); // Panel central para botones principales
+		// Panel central para los botones principales
+		JPanel panel = new JPanel();
 		panel.setBackground(new Color(199, 169, 139));
 		contentPane.add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 
-		JButton btnJuegosMesa = new JButton("Juegos De mesa"); // Botón a ventana Juegos de Mesa
+		// Botón para acceder a la ventana de Juegos de Mesa
+		JButton btnJuegosMesa = new JButton("Juegos De mesa");
 		btnJuegosMesa.addActionListener(e -> {
 			VenJDM venJGD = new VenJDM();
 			venJGD.setVisible(true);
@@ -42,37 +55,44 @@ public class VenMenu extends JFrame {
 		btnJuegosMesa.setBounds(40, 74, 147, 101);
 		panel.add(btnJuegosMesa);
 
-		JPanel panel_1 = new JPanel(); // Panel lateral para el carrito
+		// Panel lateral para mostrar el carrito de compras
+		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(641, 0, 203, 497);
 		panel.add(panel_1);
 		panel_1.setBackground(new Color(199, 169, 139));
 		panel_1.setLayout(null);
 
-		textCarrito = new JTextArea(); // Muestra items del carrito
+		// Área de texto para mostrar los items del carrito
+		textCarrito = new JTextArea();
 		textCarrito.setBackground(new Color(255, 255, 255));
 		textCarrito.setBounds(10, 5, 183, 374);
 		panel_1.add(textCarrito);
 		textCarrito.setEditable(false);
 
-		JLabel lblTotal = new JLabel("Total"); // Etiqueta "Total"
+		// Etiqueta para el total del carrito
+		JLabel lblTotal = new JLabel("Total");
 		lblTotal.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblTotal.setBounds(10, 378, 116, 33);
 		panel_1.add(lblTotal);
 
-		JButton btnCancelar = new JButton("Cancelar"); // Botón Cancelar (sin funcionalidad)
+		// Botón para cancelar la compra (sin funcionalidad implementada)
+		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(10, 453, 183, 33);
 		panel_1.add(btnCancelar);
 
-		JButton btnCobrar = new JButton("Cobrar"); // Botón Cobrar (sin funcionalidad)
+		// Botón para proceder al cobro (sin funcionalidad implementada)
+		JButton btnCobrar = new JButton("Cobrar");
 		btnCobrar.setBounds(10, 409, 183, 33);
 		panel_1.add(btnCobrar);
 
-		lblTotal_1 = new JLabel("0.00 €"); // Muestra el total del carrito
+		// Etiqueta que muestra el total numérico del carrito
+		lblTotal_1 = new JLabel("0.00 €");
 		lblTotal_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblTotal_1.setBounds(136, 378, 57, 33);
 		panel_1.add(lblTotal_1);
 
-		JButton btnTCG = new JButton("TCG"); // Botón a ventana TCG
+		// Botón para acceder a la ventana de Tarjetas Coleccionables (TCG)
+		JButton btnTCG = new JButton("TCG");
 		btnTCG.addActionListener(e -> {
 			VenTCG v1 = new VenTCG();
 			v1.setVisible(true);
@@ -81,7 +101,8 @@ public class VenMenu extends JFrame {
 		btnTCG.setBounds(197, 74, 147, 101);
 		panel.add(btnTCG);
 
-		JButton btnInventario = new JButton("Inventario"); // Botón a ventana Inventario
+		// Botón para acceder a la ventana de gestión del Inventario
+		JButton btnInventario = new JButton("Inventario");
 		btnInventario.addActionListener(e -> {
 			VenInventario v1 = new VenInventario();
 			v1.setVisible(true);
@@ -90,7 +111,8 @@ public class VenMenu extends JFrame {
 		btnInventario.setBounds(354, 74, 147, 101);
 		panel.add(btnInventario);
 
-		if(SesionEmpleado.esAdmin()){ // Botón de gestión de empleados (solo para admin)
+		// Botón para la gestión de empleados, visible solo si el usuario es administrador
+		if(SesionEmpleado.esAdmin()){
 			JButton btngestionEmpleados = new JButton("Gestionar Empleados");
 			btngestionEmpleados.addActionListener(e -> {
 				VenEmpleados v1 = new VenEmpleados();
@@ -101,7 +123,8 @@ public class VenMenu extends JFrame {
 			panel.add(btngestionEmpleados);
 		}
 
-		JButton btnCerrarSesion = new JButton("Cerrar Sesión"); // Botón para cerrar sesión
+		// Botón para cerrar la sesión actual del empleado
+		JButton btnCerrarSesion = new JButton("Cerrar Sesión");
 		btnCerrarSesion.addActionListener(e -> {
 			SesionEmpleado.cerrarSesion();
 			VenPrincipal venLogin = new VenPrincipal();
@@ -111,11 +134,13 @@ public class VenMenu extends JFrame {
 		btnCerrarSesion.setBounds(40, 450, 461, 40);
 		panel.add(btnCerrarSesion);
 
-		JLabel lblTitulo = new JLabel("Magicas: el encuentro"); // Título de la ventana
+		// Título principal de la ventana
+		JLabel lblTitulo = new JLabel("Magicas: el encuentro");
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		contentPane.add(lblTitulo, BorderLayout.NORTH);
 
-		carrito = new Carrito(textCarrito, lblTotal_1); // Inicialización del carrito
+		// Inicialización del carrito de compras, asociándolo al área de texto y la etiqueta del total
+		carrito = new Carrito(textCarrito, lblTotal_1);
 	}
 }
