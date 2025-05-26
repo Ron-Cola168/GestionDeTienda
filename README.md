@@ -25,22 +25,21 @@ cd GestionDeTienda
 1. Descarga el driver JDBC para Oracle desde la [página oficial de Oracle](https://www.oracle.com/database/technologies/appdev/jdbc-downloads.html).
 2. Copia el archivo `ojdbc8.jar` (o la versión correspondiente) en una carpeta `lib` dentro del proyecto (créala si no existe).
 3. Añade el JAR del driver al classpath de tu proyecto. Si usas un IDE, agrégalo como dependencia externa.
-### 3. Configuración de Oracle Wallet (si aplica)
 
+### 3. Configuración de Oracle Wallet
 
+Para poder acceder a la base de datos unicamente es necesario mantener el wallet proporcionado en la carpeta OtrosRecursos/Wallet_Magicas dentro del proyecto.
+En el caso de querer utilizar una base de datos propia que no sea la de los alumnos sera necesario cambiar en la clase DatabaseConnection las siguientes lineas
+1. Línea 18: private static final String DB_USER = "Nombre_de_tu_usuario"
+2. Línea 19: private static final String DB_PASSWORD = "contraseña_de_tu_usuario"
+3. Línea 23: private static final String WALLET_PATH = "ruta/a/tu/Wallet"
+4. Línea 25: private static final String TNS_NAME = "nombre_de_servicio_TSN" (Ej: magicaselencuentro_medium)
 
 ### 4. Configuración de la Base de Datos
 
-1. Crea las tablas necesarias ejecutando los scripts SQL proporcionados (si existen) en la carpeta `/sql` del repositorio.
-2. Configura los datos de conexión (usuario, contraseña, host, puerto, SID o service name) en el archivo de configuración de la aplicación, o directamente en el código fuente según corresponda.
+En caso de utilizar una base de datos propia es necesario utilizar los archivos sql del directorio OtrosRecursos/SQL, para tener las tablas identicas y no tener la necesidad de modificar el codigo
 
 ### 5. Ejecución de la Aplicación
 
-Compila el proyecto .java desde tu IDE (el que estes usando) en nuestro caso IntelliJ.
----
+Ejecuta el proyecto desde la clase VenPrincipal desde tu IDE
 
-## Notas adicionales
-
-- Asegúrate de que la base de datos Oracle esté activa y accesible desde tu equipo.
-- Si tienes problemas de conexión, revisa la configuración de red y los parámetros en la cadena de conexión.
-- Para dudas adicionales, consulta la documentación oficial de Oracle o abre una issue en este repositorio.
