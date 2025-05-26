@@ -62,7 +62,7 @@ public class VenMenu extends JFrame {
 		panel_1.setBackground(new Color(199, 169, 139));
 		panel_1.setLayout(null);
 
-		// Área de texto para mostrar los items del carrito
+		// Area de texto para mostrar los items del carrito
 		textCarrito = new JTextArea();
 		textCarrito.setBackground(new Color(255, 255, 255));
 		textCarrito.setBounds(10, 5, 183, 374);

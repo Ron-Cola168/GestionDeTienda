@@ -200,7 +200,7 @@ public class VenJDM extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        // Área de texto para mostrar la lista de juegos
+        // Area de texto para mostrar la lista de juegos
         textArea = new JTextArea();
         textArea.setEditable(false);
         textArea.setLineWrap(true);

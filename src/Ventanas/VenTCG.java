@@ -193,7 +193,7 @@ public class VenTCG extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        // Área de texto para mostrar la lista de tarjetas TCG
+        // Area de texto para mostrar la lista de tarjetas TCG
         textArea = new JTextArea();
         textArea.setEditable(false);
         textArea.setLineWrap(true);

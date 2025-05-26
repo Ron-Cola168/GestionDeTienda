@@ -36,7 +36,7 @@ public class VenEmpleados extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        // Área de texto donde se listan los empleados
+        // Area de texto donde se listan los empleados
         textListaEmpleados = new JTextPane();
         textListaEmpleados.setEditable(false);
         scrollPane = new JScrollPane(textListaEmpleados);
