@@ -4,7 +4,7 @@ Magicas: El Encuentro
 
 ## 📝 Descripción del Proyecto
 
-En este proyecto cuyos participamos Pablo Segura González y Gonzalo Benítez Díaz. Nuestro proyecto llamado "Magicas: El Encuentro" consta de la gestión de una tienda la cual servirá de gran ayuda a los dependientes de la tienda para 
+En este proyecto cuyos participamos Pablo Segura González y Gonzalo Benítez Díaz. Nuestro proyecto llamado "Magicas: El Encuentro" está pensada para el uso de tiendas de venta de juegos de mesa y juegos de cartas coleccionables (TCG). La aplicación hace la función básica para gestionar el almacén y los empleados de la tienda.
 
 ---
 
