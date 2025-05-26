@@ -24,8 +24,7 @@ cd GestionDeTienda
 
 1. Descarga el driver JDBC para Oracle desde la [página oficial de Oracle](https://www.oracle.com/database/technologies/appdev/jdbc-downloads.html).
 2. Copia el archivo `ojdbc8.jar` (o la versión correspondiente) en una carpeta `lib` dentro del proyecto (créala si no existe).
-3. Añade el JAR del driver al classpath de tu proyecto. Si usas un IDE, agrégalo como dependencia externa. Si compilas por terminal, utiliza la opción `-cp`.
-
+3. Añade el JAR del driver al classpath de tu proyecto. Si usas un IDE, agrégalo como dependencia externa.
 ### 3. Configuración de Oracle Wallet (si aplica)
 
 
